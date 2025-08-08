@@ -1,0 +1,398 @@
+   MainThread:13:10:37.697 util.py                                   210 DEBUG    | Send cmd --> netsh wlan show interfaces
+   MainThread:13:10:37.794 util.py                                   216 DEBUG    | Receive response --> 
+There is 1 interface on the system: 
+
+    Name                   : Wi-Fi
+    Description            : Intel(R) Wi-Fi 6E AX211 160MHz
+    GUID                   : 682fc790-eaf5-4eee-92dc-ab5eabd5b11c
+    Physical address       : 60:45:2e:1a:f7:7a
+    Interface type         : Primary
+    State                  : connected
+    SSID                   : WIFI-PRO
+    AP BSSID               : f6:9f:c2:f2:56:b2
+    Band                   : 5 GHz
+    Channel                : 44
+    Network type           : Infrastructure
+    Radio type             : 802.11ac
+    Authentication         : WPA2-Personal
+    Cipher                 : CCMP
+    Connection mode        : Profile
+    Receive rate (Mbps)    : 135
+    Transmit rate (Mbps)   : 360
+    Signal                 : 70% 
+    Profile                : WIFI-PRO 
+    QoS MSCS Configured         : 0
+    QoS Map Configured          : 0
+    QoS Map Allowed by Policy   : 0
+
+    Hosted network status  : Not available
+
+
+   MainThread:13:10:37.794 wireless.py                                93 DEBUG    | Wifi setup. Using [WifiCli] driver::[Wi-Fi] interface
+   MainThread:13:10:37.794 bleak_wrapper.py                          121 INFO     | Scanning for GoPro [A-Z0-9]{4} bluetooth devices...
+   MainThread:13:10:38.046 scanner.py                                117 DEBUG    | Received E1:72:30:FA:47:C1: .
+   MainThread:13:10:38.073 scanner.py                                117 DEBUG    | Received E1:72:30:FA:47:C1: GoPro 3495.
+   MainThread:13:10:38.073 bleak_wrapper.py                          134 INFO     | 	Discovered: E1:72:30:FA:47:C1: GoPro 3495
+   MainThread:13:10:38.076 scanner.py                                212 DEBUG    | 1 devices found. Watcher status: <BluetoothLEAdvertisementWatcherStatus.STOPPED: 3>.
+   MainThread:13:10:38.077 bleak_wrapper.py                          147 INFO     | Found 1 matching devices.
+   MainThread:13:10:38.077 client.py                                 107 INFO     | Establishing the BLE connection
+   MainThread:13:10:38.079 bleak_wrapper.py                          214 INFO     | Establishing BLE connection to E1:72:30:FA:47:C1: GoPro 3495...
+   MainThread:13:10:38.102 client.py                                 334 DEBUG    | Connecting to BLE device @ E1:72:30:FA:47:C1
+   MainThread:13:10:38.824 client.py                                 717 DEBUG    | getting services (service_cache_mode=None, cache_mode=None)...
+      Dummy-4:13:10:43.068 client.py                                 412 DEBUG    | session_status_changed_event_handler: id: BluetoothLE#BluetoothLE60:45:2e:1a:f7:7e-e1:72:30:fa:47:c1, error: <BluetoothError.SUCCESS: 0>, status: <GattSessionStatus.ACTIVE: 1>
+   MainThread:13:10:43.068 bleak_wrapper.py                          258 DEBUG    | Attempting to pair...
+   MainThread:13:10:43.068 bleak_wrapper.py                          301 DEBUG    | Pairing complete!
+   MainThread:13:10:43.068 bleak_wrapper.py                          359 INFO     | Discovering characteristics...
+   MainThread:13:10:43.068 bleak_wrapper.py                          367 DEBUG    | [Service] Generic Attribute Service
+   MainThread:13:10:43.068 bleak_wrapper.py                          367 DEBUG    | [Service] Generic Access Service
+   MainThread:13:10:43.068 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Device Name @ handle 3: READ
+   MainThread:13:10:43.068 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Appearance @ handle 5: READ
+   MainThread:13:10:43.068 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Preferred Connection Parameters @ handle 7: READ
+   MainThread:13:10:43.068 bleak_wrapper.py                          367 DEBUG    | [Service] Battery Service
+      Dummy-5:13:10:45.389 client.py                                 429 DEBUG    | max_pdu_size_changed_handler: 517
+   MainThread:13:10:45.513 client.py                                 917 DEBUG    | Read Descriptor 000C : bytearray(b'\x00\x00')
+   MainThread:13:10:45.513 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Battery Level @ handle 10: READ|NOTIFY
+   MainThread:13:10:45.513 bleak_wrapper.py                          367 DEBUG    | [Service] Device Information Service
+   MainThread:13:10:45.513 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Manufacturer Name @ handle 14: READ
+   MainThread:13:10:45.513 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Model Number @ handle 16: READ
+   MainThread:13:10:45.513 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Serial Number @ handle 18: READ
+   MainThread:13:10:45.513 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Hardware Revision @ handle 20: READ
+   MainThread:13:10:45.513 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Firmware Revision @ handle 22: READ
+   MainThread:13:10:45.513 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Software Revision @ handle 24: READ
+   MainThread:13:10:45.513 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] System ID @ handle 26: READ
+   MainThread:13:10:45.513 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] PNP ID @ handle 28: READ
+   MainThread:13:10:45.513 bleak_wrapper.py                          367 DEBUG    | [Service] Wifi Access Point Service
+   MainThread:13:10:45.513 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Wifi AP SSID @ handle 31: READ|WRITE_YES_RSP
+   MainThread:13:10:45.513 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Wifi AP Password @ handle 33: READ|WRITE_YES_RSP
+   MainThread:13:10:45.513 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Wifi Power @ handle 35: WRITE_YES_RSP
+   MainThread:13:10:45.626 client.py                                 917 DEBUG    | Read Descriptor 0027 : bytearray(b'\x00\x00')
+   MainThread:13:10:45.626 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Wifi State @ handle 37: READ|INDICATE
+   MainThread:13:10:45.626 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] CSI Password @ handle 40: READ
+   MainThread:13:10:45.626 bleak_wrapper.py                          367 DEBUG    | [Service] Control and Query Service
+   MainThread:13:10:45.626 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Command @ handle 43: WRITE_YES_RSP
+   MainThread:13:10:45.753 client.py                                 917 DEBUG    | Read Descriptor 002F : bytearray(b'\x00\x00')
+   MainThread:13:10:45.753 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Command Response @ handle 45: NOTIFY
+   MainThread:13:10:45.753 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Settings @ handle 48: WRITE_YES_RSP
+   MainThread:13:10:45.874 client.py                                 917 DEBUG    | Read Descriptor 0034 : bytearray(b'\x00\x00')
+   MainThread:13:10:45.874 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Settings Response @ handle 50: NOTIFY
+   MainThread:13:10:45.874 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Query @ handle 53: WRITE_YES_RSP
+   MainThread:13:10:45.994 client.py                                 917 DEBUG    | Read Descriptor 0039 : bytearray(b'\x00\x00')
+   MainThread:13:10:45.994 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Query Response @ handle 55: NOTIFY
+   MainThread:13:10:45.994 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Sensor @ handle 58: WRITE_YES_RSP
+   MainThread:13:10:46.111 client.py                                 917 DEBUG    | Read Descriptor 003E : bytearray(b'\x00\x00')
+   MainThread:13:10:46.111 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Sensor Response @ handle 60: NOTIFY
+   MainThread:13:10:46.111 bleak_wrapper.py                          367 DEBUG    | [Service] Camera Management Service
+   MainThread:13:10:46.111 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Camera Management @ handle 64: WRITE_YES_RSP
+   MainThread:13:10:46.233 client.py                                 917 DEBUG    | Read Descriptor 0044 : bytearray(b'\x00\x00')
+   MainThread:13:10:46.233 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Camera Management Response @ handle 66: NOTIFY
+   MainThread:13:10:46.233 bleak_wrapper.py                          367 DEBUG    | [Service] Unknown Service
+   MainThread:13:10:46.353 client.py                                 917 DEBUG    | Read Descriptor 0048 : bytearray(b'\x00\x00')
+   MainThread:13:10:46.353 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Internal 81 @ handle 70: NOTIFY
+   MainThread:13:10:46.353 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Internal 82 @ handle 73: WRITE_YES_RSP
+   MainThread:13:10:46.471 client.py                                 917 DEBUG    | Read Descriptor 004D : bytearray(b'\x00\x00')
+   MainThread:13:10:46.471 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Internal 83 @ handle 75: NOTIFY
+   MainThread:13:10:46.592 client.py                                 917 DEBUG    | Read Descriptor 0050 : bytearray(b'\x00\x00')
+   MainThread:13:10:46.592 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Internal 84 @ handle 78: NOTIFY
+   MainThread:13:10:46.592 bleak_wrapper.py                          367 DEBUG    | [Service] Tx Power Service
+   MainThread:13:10:46.592 bleak_wrapper.py                          399 DEBUG    | 	[Characteristic] Tx Power Level @ handle 82: READ
+   MainThread:13:10:46.592 bleak_wrapper.py                          404 INFO     | Done discovering characteristics!
+   MainThread:13:10:46.594 bleak_wrapper.py                          322 INFO     | Enabling notifications...
+   MainThread:13:10:46.596 bleak_wrapper.py                          326 DEBUG    | Enabling notification on char 00002a19-0000-1000-8000-00805f9b34fb
+   MainThread:13:10:46.713 bleak_wrapper.py                          326 DEBUG    | Enabling notification on char b5f90073-aa8d-11e3-9046-0002a5d5c51b
+   MainThread:13:10:46.833 bleak_wrapper.py                          326 DEBUG    | Enabling notification on char b5f90075-aa8d-11e3-9046-0002a5d5c51b
+   MainThread:13:10:46.951 bleak_wrapper.py                          326 DEBUG    | Enabling notification on char b5f90077-aa8d-11e3-9046-0002a5d5c51b
+   MainThread:13:10:47.071 bleak_wrapper.py                          326 DEBUG    | Enabling notification on char b5f90079-aa8d-11e3-9046-0002a5d5c51b
+   MainThread:13:10:47.193 bleak_wrapper.py                          326 DEBUG    | Enabling notification on char b5f90092-aa8d-11e3-9046-0002a5d5c51b
+   MainThread:13:10:47.315 bleak_wrapper.py                          326 DEBUG    | Enabling notification on char b5f90081-aa8d-11e3-9046-0002a5d5c51b
+   MainThread:13:10:47.432 bleak_wrapper.py                          326 DEBUG    | Enabling notification on char b5f90083-aa8d-11e3-9046-0002a5d5c51b
+   MainThread:13:10:47.551 bleak_wrapper.py                          326 DEBUG    | Enabling notification on char b5f90084-aa8d-11e3-9046-0002a5d5c51b
+   MainThread:13:10:47.662 bleak_wrapper.py                          328 INFO     | Done enabling notifications
+   MainThread:13:10:47.662 gopro_wireless.py                         723 INFO     | 
+<<<<<<<<--------------
+    "id" : "QueryCmdId.REG_STATUS_VAL_UPDATE",
+    "status_id" : "StatusId.ENCODING",
+    "protocol" : "Protocol.BLE",
+    "uuid" : "Query",
+<<<<<<<<--------------
+
+   MainThread:13:10:47.662 gopro_wireless.py                         727 DEBUG    | Writing to [Query] UUID: 20:02:53:0a
+   MainThread:13:10:47.662 bleak_wrapper.py                          101 DEBUG    | Writing to Query: b5f90076aa8d11e390460002a5d5c51b
+   MainThread:13:10:47.788 gopro_wireless.py                         681 DEBUG    | Received response on BleUUID [Query Response]: 05:53:00:0a:01:00
+   MainThread:13:10:47.788 gopro_wireless.py                         656 INFO     | 
+-------------->>>>>>>>
+    "id" : "QueryCmdId.REG_STATUS_VAL_UPDATE",
+    "status" : "ErrorCode.SUCCESS",
+    "protocol" : "Protocol.BLE",
+    "data" : {
+        "StatusId.ENCODING" : "False",
+    },
+-------------->>>>>>>>
+
+   MainThread:13:10:47.788 gopro_wireless.py                         723 INFO     | 
+<<<<<<<<--------------
+    "id" : "QueryCmdId.REG_STATUS_VAL_UPDATE",
+    "status_id" : "StatusId.BUSY",
+    "protocol" : "Protocol.BLE",
+    "uuid" : "Query",
+<<<<<<<<--------------
+
+   MainThread:13:10:47.788 gopro_wireless.py                         727 DEBUG    | Writing to [Query] UUID: 20:02:53:08
+   MainThread:13:10:47.788 bleak_wrapper.py                          101 DEBUG    | Writing to Query: b5f90076aa8d11e390460002a5d5c51b
+   MainThread:13:10:47.900 gopro_wireless.py                         681 DEBUG    | Received response on BleUUID [Query Response]: 05:53:00:08:01:00
+   MainThread:13:10:47.900 gopro_wireless.py                         656 INFO     | 
+-------------->>>>>>>>
+    "id" : "QueryCmdId.REG_STATUS_VAL_UPDATE",
+    "status" : "ErrorCode.SUCCESS",
+    "protocol" : "Protocol.BLE",
+    "data" : {
+        "StatusId.BUSY" : "False",
+    },
+-------------->>>>>>>>
+
+   MainThread:13:10:47.916 gopro_wireless.py                         596 INFO     | BLE is ready!
+   MainThread:13:10:47.931 gopro_wireless.py                         723 INFO     | 
+<<<<<<<<--------------
+    "id" : "CmdId.SET_DATE_TIME_DST",
+    "protocol" : "Protocol.BLE",
+    "uuid" : "Command",
+    "date_time" : "2025-06-10 13:10:47.931801+02:00",
+    "tz_offset" : "120",
+    "is_dst" : "True",
+<<<<<<<<--------------
+
+   MainThread:13:10:47.947 gopro_wireless.py                         727 DEBUG    | Writing to [Command] UUID: 20:0c:0f:0a:07:e9:06:0a:0d:0a:2f:00:78:01
+   MainThread:13:10:47.947 bleak_wrapper.py                          101 DEBUG    | Writing to Command: b5f90072aa8d11e390460002a5d5c51b
+   MainThread:13:10:48.027 gopro_wireless.py                         681 DEBUG    | Received response on BleUUID [Command Response]: 02:0f:00
+   MainThread:13:10:48.027 gopro_wireless.py                         656 INFO     | 
+-------------->>>>>>>>
+    "id" : "CmdId.SET_DATE_TIME_DST",
+    "status" : "ErrorCode.SUCCESS",
+    "protocol" : "Protocol.BLE",
+-------------->>>>>>>>
+
+   MainThread:13:10:48.027 gopro_wireless.py                         723 INFO     | 
+<<<<<<<<--------------
+    "id" : "CmdId.GET_THIRD_PARTY_API_VERSION",
+    "protocol" : "Protocol.BLE",
+    "uuid" : "Command",
+<<<<<<<<--------------
+
+   MainThread:13:10:48.027 gopro_wireless.py                         727 DEBUG    | Writing to [Command] UUID: 20:01:51
+   MainThread:13:10:48.027 bleak_wrapper.py                          101 DEBUG    | Writing to Command: b5f90072aa8d11e390460002a5d5c51b
+   MainThread:13:10:48.155 gopro_wireless.py                         681 DEBUG    | Received response on BleUUID [Command Response]: 06:51:00:01:02:01:00
+   MainThread:13:10:48.155 gopro_wireless.py                         656 INFO     | 
+-------------->>>>>>>>
+    "id" : "CmdId.GET_THIRD_PARTY_API_VERSION",
+    "status" : "ErrorCode.SUCCESS",
+    "protocol" : "Protocol.BLE",
+    "data" : "2.0",
+-------------->>>>>>>>
+
+   MainThread:13:10:48.155 gopro_wireless.py                         310 INFO     | Using Open GoPro API version 2.0
+   MainThread:13:10:48.155 gopro_wireless.py                         793 INFO     | Discovering Wifi AP info and enabling via BLE
+   MainThread:13:10:48.155 bleak_wrapper.py                           88 DEBUG    | Reading from Wifi AP Password
+   MainThread:13:10:48.274 client.py                                 878 DEBUG    | Read Characteristic 0021 : bytearray(b'Gfh-YcJ-J3S')
+   MainThread:13:10:48.274 bleak_wrapper.py                           90 DEBUG    | Received response on BleUUID [Wifi AP Password]: 47:66:68:2d:59:63:4a:2d:4a:33:53
+   MainThread:13:10:48.274 gopro_wireless.py                         749 DEBUG    | Reading from Wifi AP Password
+   MainThread:13:10:48.274 bleak_wrapper.py                           88 DEBUG    | Reading from Wifi AP SSID
+   MainThread:13:10:48.394 client.py                                 878 DEBUG    | Read Characteristic 001F : bytearray(b'CAMERA07')
+   MainThread:13:10:48.394 bleak_wrapper.py                           90 DEBUG    | Received response on BleUUID [Wifi AP SSID]: 43:41:4d:45:52:41:30:37
+   MainThread:13:10:48.394 gopro_wireless.py                         749 DEBUG    | Reading from Wifi AP SSID
+   MainThread:13:10:48.394 gopro_wireless.py                         723 INFO     | 
+<<<<<<<<--------------
+    "id" : "CmdId.SET_WIFI",
+    "protocol" : "Protocol.BLE",
+    "uuid" : "Command",
+    "enable" : "True",
+<<<<<<<<--------------
+
+   MainThread:13:10:48.394 gopro_wireless.py                         727 DEBUG    | Writing to [Command] UUID: 20:03:17:01:01
+   MainThread:13:10:48.394 bleak_wrapper.py                          101 DEBUG    | Writing to Command: b5f90072aa8d11e390460002a5d5c51b
+   MainThread:13:10:48.514 gopro_wireless.py                         681 DEBUG    | Received response on BleUUID [Command Response]: 02:17:00
+   MainThread:13:10:48.514 gopro_wireless.py                         656 INFO     | 
+-------------->>>>>>>>
+    "id" : "CmdId.SET_WIFI",
+    "status" : "ErrorCode.SUCCESS",
+    "protocol" : "Protocol.BLE",
+-------------->>>>>>>>
+
+   MainThread:13:10:48.514 wireless.py                               873 INFO     | Attempting to establish Wifi connection to CAMERA07...
+   MainThread:13:10:48.520 util.py                                   210 DEBUG    | Send cmd --> netsh wlan disconnect
+   MainThread:13:10:48.631 util.py                                   216 DEBUG    | Receive response --> Disconnection request was completed successfully for interface "Wi-Fi".
+
+   MainThread:13:10:48.631 util.py                                   210 DEBUG    | Send cmd --> netsh wlan delete profile name="CAMERA07"
+   MainThread:13:10:49.129 util.py                                   216 DEBUG    | Receive response --> Profile "CAMERA07" is deleted from interface "Wi-Fi".
+
+   MainThread:13:10:49.129 wireless.py                               880 DEBUG    | Using template <?xml version="1.0"?>
+<WLANProfile xmlns="http://www.microsoft.com/networking/WLAN/profile/v1">
+    <name>CAMERA07</name>
+    <SSIDConfig>
+        <SSID>
+            <name>CAMERA07</name>
+        </SSID>
+    </SSIDConfig>
+    <connectionType>ESS</connectionType>
+    <connectionMode>manual</connectionMode>
+    <MSM>
+        <security>
+            <authEncryption>
+                <authentication>WPA2PSK</authentication>
+                <encryption>AES</encryption>
+                <useOneX>false</useOneX>
+            </authEncryption>
+            <sharedKey>
+                <keyType>passPhrase</keyType>
+                <protected>false</protected>
+                <keyMaterial>Gfh-YcJ-J3S</keyMaterial>
+            </sharedKey>
+        </security>
+    </MSM>
+    <MacRandomization xmlns="http://www.microsoft.com/networking/WLAN/profile/v3">
+        <enableRandomization>false</enableRandomization>
+    </MacRandomization>
+</WLANProfile>
+   MainThread:13:10:49.129 util.py                                   210 DEBUG    | Send cmd --> netsh wlan add profile filename=C:\Users\admin\AppData\Local\Temp\tmpfba17bg8
+   MainThread:13:10:49.235 util.py                                   216 DEBUG    | Receive response --> Profile CAMERA07 is added on interface Wi-Fi.
+
+   MainThread:13:10:49.235 util.py                                   210 DEBUG    | Send cmd --> netsh wlan connect ssid="CAMERA07" name="CAMERA07" interface="Wi-Fi"
+   MainThread:13:10:49.331 util.py                                   216 DEBUG    | Receive response --> Connection request was completed successfully.
+
+   MainThread:13:10:49.331 util.py                                   210 DEBUG    | Send cmd --> netsh wlan show interfaces
+   MainThread:13:10:49.427 util.py                                   216 DEBUG    | Receive response --> 
+There is 1 interface on the system: 
+
+    Name                   : Wi-Fi
+    Description            : Intel(R) Wi-Fi 6E AX211 160MHz
+    GUID                   : 682fc790-eaf5-4eee-92dc-ab5eabd5b11c
+    Physical address       : 60:45:2e:1a:f7:7a
+    Interface type         : Primary
+    State                  : associating
+    Radio status           : Hardware On
+                             Software On
+
+    Hosted network status  : Not available
+
+
+   MainThread:13:10:49.427 wireless.py                               902 DEBUG    | Waiting 1 second for Wi-Fi connection to establish...
+   MainThread:13:10:50.440 util.py                                   210 DEBUG    | Send cmd --> netsh wlan show interfaces
+   MainThread:13:10:50.567 util.py                                   216 DEBUG    | Receive response --> 
+There is 1 interface on the system: 
+
+    Name                   : Wi-Fi
+    Description            : Intel(R) Wi-Fi 6E AX211 160MHz
+    GUID                   : 682fc790-eaf5-4eee-92dc-ab5eabd5b11c
+    Physical address       : 60:45:2e:1a:f7:7a
+    Interface type         : Primary
+    State                  : associating
+    Radio status           : Hardware On
+                             Software On
+
+    Hosted network status  : Not available
+
+
+   MainThread:13:10:50.567 wireless.py                               902 DEBUG    | Waiting 1 second for Wi-Fi connection to establish...
+   MainThread:13:10:51.571 util.py                                   210 DEBUG    | Send cmd --> netsh wlan show interfaces
+   MainThread:13:10:51.670 util.py                                   216 DEBUG    | Receive response --> 
+There is 1 interface on the system: 
+
+    Name                   : Wi-Fi
+    Description            : Intel(R) Wi-Fi 6E AX211 160MHz
+    GUID                   : 682fc790-eaf5-4eee-92dc-ab5eabd5b11c
+    Physical address       : 60:45:2e:1a:f7:7a
+    Interface type         : Primary
+    State                  : authenticating
+    SSID                   : CAMERA07
+    AP BSSID               : 26:74:f7:f7:3f:27
+    Band                   : 5 GHz
+    Channel                : 161
+    Network type           : Infrastructure
+    Radio type             : 802.11ac
+    Authentication         : WPA2-Personal
+    Cipher                 : CCMP
+    Connection mode        : Profile
+    Receive rate (Mbps)    : 433.3
+    Transmit rate (Mbps)   : 433.3
+    Signal                 : 95% 
+    Profile                : CAMERA07 
+    QoS MSCS Configured         : 0
+    QoS Map Configured          : 0
+    QoS Map Allowed by Policy   : 0
+
+    Hosted network status  : Not available
+
+
+   MainThread:13:10:51.670 wireless.py                               902 DEBUG    | Waiting 1 second for Wi-Fi connection to establish...
+   MainThread:13:10:52.671 util.py                                   210 DEBUG    | Send cmd --> netsh wlan show interfaces
+   MainThread:13:10:52.789 util.py                                   216 DEBUG    | Receive response --> 
+There is 1 interface on the system: 
+
+    Name                   : Wi-Fi
+    Description            : Intel(R) Wi-Fi 6E AX211 160MHz
+    GUID                   : 682fc790-eaf5-4eee-92dc-ab5eabd5b11c
+    Physical address       : 60:45:2e:1a:f7:7a
+    Interface type         : Primary
+    State                  : connected
+    SSID                   : CAMERA07
+    AP BSSID               : 26:74:f7:f7:3f:27
+    Band                   : 5 GHz
+    Channel                : 161
+    Network type           : Infrastructure
+    Radio type             : 802.11ac
+    Authentication         : WPA2-Personal
+    Cipher                 : CCMP
+    Connection mode        : Profile
+    Receive rate (Mbps)    : 433.3
+    Transmit rate (Mbps)   : 433.3
+    Signal                 : 95% 
+    Profile                : CAMERA07 
+    QoS MSCS Configured         : 0
+    QoS Map Configured          : 0
+    QoS Map Allowed by Policy   : 0
+
+    Hosted network status  : Not available
+
+
+   MainThread:13:10:52.789 wireless.py                               899 INFO     | Wifi connection established!
+   MainThread:13:10:52.789 gopro_wireless.py                         723 INFO     | 
+<<<<<<<<--------------
+    "id" : "CmdId.POWER_DOWN",
+    "protocol" : "Protocol.BLE",
+    "uuid" : "Command",
+<<<<<<<<--------------
+
+   MainThread:13:10:52.794 gopro_wireless.py                         727 DEBUG    | Writing to [Command] UUID: 20:01:04
+   MainThread:13:10:52.794 bleak_wrapper.py                          101 DEBUG    | Writing to Command: b5f90072aa8d11e390460002a5d5c51b
+   MainThread:13:10:52.794 gopro_wireless.py                         681 DEBUG    | Received response on BleUUID [Query Response]: 08:93:00:08:01:00:0a:01:00
+   MainThread:13:10:52.794 gopro_wireless.py                         662 INFO     | 
+----ASYNC----->>>>>>>>
+    "id" : "QueryCmdId.STATUS_VAL_PUSH",
+    "status" : "ErrorCode.SUCCESS",
+    "protocol" : "Protocol.BLE",
+    "data" : {
+        "StatusId.BUSY" : "False",
+        "StatusId.ENCODING" : "False",
+    },
+----ASYNC----->>>>>>>>
+
+   MainThread:13:10:52.891 gopro_wireless.py                         681 DEBUG    | Received response on BleUUID [Command Response]: 02:04:00
+   MainThread:13:10:52.891 gopro_wireless.py                         656 INFO     | 
+-------------->>>>>>>>
+    "id" : "CmdId.POWER_DOWN",
+    "status" : "ErrorCode.SUCCESS",
+    "protocol" : "Protocol.BLE",
+-------------->>>>>>>>
+
+   MainThread:13:10:52.896 util.py                                   210 DEBUG    | Send cmd --> netsh wlan disconnect interface="Wi-Fi"
+   MainThread:13:10:53.019 util.py                                   216 DEBUG    | Receive response --> Disconnection request was completed successfully for interface "Wi-Fi".
+
+   MainThread:13:10:53.019 client.py                                 131 INFO     | Terminating the BLE connection
+   MainThread:13:10:53.034 bleak_wrapper.py                          414 INFO     | Disconnecting...
+   MainThread:13:10:53.034 client.py                                 549 DEBUG    | Disconnecting from BLE device...
+      Dummy-5:13:10:53.736 client.py                                 429 DEBUG    | max_pdu_size_changed_handler: 23
+      Dummy-6:13:10:53.736 client.py                                 412 DEBUG    | session_status_changed_event_handler: id: BluetoothLE#BluetoothLE60:45:2e:1a:f7:7e-e1:72:30:fa:47:c1, error: <BluetoothError.SUCCESS: 0>, status: <GattSessionStatus.CLOSED: 0>
+   MainThread:13:10:53.738 client.py                                 364 DEBUG    | closing requester
+   MainThread:13:10:53.738 client.py                                 381 DEBUG    | closing session
+   MainThread:13:10:53.738 bleak_wrapper.py                          417 INFO     | Device disconnected!
+   MainThread:13:10:53.738 util.py                                   210 DEBUG    | Send cmd --> netsh wlan disconnect interface="Wi-Fi"
+   MainThread:13:10:53.876 util.py                                   216 DEBUG    | Receive response --> 
+
