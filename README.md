@@ -4,7 +4,7 @@ Go2Rep is a GUI for multi-GoPro HERO (tested on GoPro 11/13) video collection an
 <img src="Assets/Image1.png" alt="Go2Rep GUI" width="1000">
 
 
-# GoPro Control
+## GoPro Control
 Go2Rep provides a unified interface for controlling multiple GoPro HERO cameras (tested on HERO11 and HERO13) over wireless connections.  
 It handles the full workflow from discovery and connection to recording, downloading, and organizing videos.  
 The application automatically adapts its communication method based on the camera model, ensuring the correct protocol is used for reliable control and media transfer.
