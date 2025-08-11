@@ -114,7 +114,7 @@ This configures environment variables so `cl.exe` can be found.
      ```
 # 1. Features
 
-# 1.0 Visual flow chart of Go2Rep
+## 1.0 Visual flow chart of Go2Rep
 
 <img src="Assets/Image8.png" alt="Go2Rep GUI" width="300"> 
 
