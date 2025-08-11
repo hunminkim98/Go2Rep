@@ -169,12 +169,12 @@ The synchronization feature aligns multiple videos recorded during the same tria
 
 ### 1.2.1 Manual Synchronization
 
-A GUI-based tool with CUDA acceleration that lets users manually select matching frames across videos. Videos are grouped by timestamped filenames and users pick a reference video, define a frame range, then visually select corresponding frames in other videos to calculate frame offsets. The output is a JSON file listing frame offsets per video.
+A GUI-based tool with CUDA acceleration that lets users manually select matching frames across videos. Videos are grouped by timestamped filenames and users pick a reference video, define a frame range, then visually select corresponding frames in other videos to calculate frame offsets. The output is a JSON file listing frame offsets per video. 
 
 **Key points:**
 
-- Requires manual frame selection aided by real-time CUDA video processing.  
-- Works best when videos contain a clear synchronization event.  
+- Requires manual frame selection aided by CUDA video processing.  
+- Require videos contain a clear synchronization event.  
 - Outputs offsets for temporal alignment of all videos.
 
 <img src="Assets/Image3.png" alt="Go2Rep GUI" width="600" style="display: block; margin: auto;" />
