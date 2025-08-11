@@ -268,3 +268,5 @@ It extracts key biomechanical parameters, including:
 - **`.csv`** – joint angles over time  
 - **Multi-page `.pdf`** – plots of joint angles
 
+
+<img src="Assets/Image7.png" alt="Go2Rep GUI" width="800" style="display: block; margin: auto;" />
