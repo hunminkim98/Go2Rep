@@ -206,3 +206,34 @@ The output is Classified, synchronized, and re-encoded video sets per trial and 
   - With a synchronization file, trimming respects the provided frame offsets and defined start/end frame ranges, ensuring precise temporal alignment before further trimming all videos to the minimum valid frame range.  
 - **Re-encoding:** Videos are re-encoded in the selected output format to ensure compatibility with Theia.  
 - **Output:** Saves synchronized, trimmed, and re-encoded videos in trial- and camera-specific folders ready for Theia analysis.
+
+## 1.4 Calibration
+
+This module automates camera calibration (intrinsic and extrinsic parameters) essential for accurate 3D reconstruction and measurement from video data. It uses OpenCV and provides an interactive GUI for manual confirmation or selection of known 3D scene points, following a workflow similar to Pose2Sim.
+
+### 1.4.1 Calibration Workflow
+
+- **Inputs:**
+  - Videos or images showing at least six visible, known 3D scene points
+  - `config.toml` with measured 3D points and calibration settings
+  - Pre-computed intrinsic parameters file (`Calib.toml`) from Pose2Sim
+
+- **Process:**
+  1. User launches calibration from the GUI and selects input/output folders.
+  2. The system attempts to detect known points automatically; users can confirm or manually select points via an interactive window.
+  3. Manual controls allow adding/removing points and marking points as not visible.
+  4. Extrinsic parameters (camera position and orientation) are computed once points are confirmed.
+  5. Calibration results are saved as `.toml` and `.qca.txt` files; optionally, a `.trc` file for biomechanical use can be generated.
+
+- **Outputs:**
+  - Extrinsic camera parameters for 3D reconstruction
+  - Calibration files compatible with Pose2Sim and OpenSim
+
+### Key Features
+
+- Requires user interaction for accurate point matching.
+- Depends on quality of calibration points and proper configuration.
+- Intrinsic calibration must be provided externally (via Pose2Sim).
+- Future improvements include automatic pattern detection and integrated intrinsic calibration.
+
+
