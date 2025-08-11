@@ -276,3 +276,4 @@ It extracts key biomechanical parameters, including:
 
 
 <img src="Assets/Image7.png" alt="Go2Rep GUI" width="800" style="display: block; margin: auto;" />
+<img src="Assets/gif2.gif" alt="Calibration GIF" width="800" style="display: block; margin: auto;" />
