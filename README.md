@@ -18,9 +18,34 @@ Key capabilities include:
 
 ---
             
-                        | Feature                | GoPro 11 or older | GoPro 13 / 12   |
-                        |------------------------|-------------------|-----------------|
-                        | **Protocols Used**     | BLE + WiFi AP     | HTTPS via COHN  |
-                        | **Certificate Provisioning** | ❌ Not Required  | ✅ Required     |
-                        | **Preview & Streaming**| Supported via WiFi AP | Supported via COHN* |
-                        | **Media Download**     | Basic via BLE + WiFi | Encrypted via HTTPS |
+<table border="1" cellspacing="0" cellpadding="6">
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>GoPro 11 or older</th>
+      <th>GoPro 13 / 12</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Protocols Used</strong></td>
+      <td>BLE + WiFi AP</td>
+      <td>HTTPS via COHN</td>
+    </tr>
+    <tr>
+      <td><strong>Certificate Provisioning</strong></td>
+      <td>❌ Not Required</td>
+      <td>✅ Required</td>
+    </tr>
+    <tr>
+      <td><strong>Preview &amp; Streaming</strong></td>
+      <td>Supported via WiFi AP</td>
+      <td>Supported via COHN*</td>
+    </tr>
+    <tr>
+      <td><strong>Media Download</strong></td>
+      <td>Basic via BLE + WiFi</td>
+      <td>Encrypted via HTTPS</td>
+    </tr>
+  </tbody>
+</table>
