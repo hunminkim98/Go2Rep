@@ -188,3 +188,22 @@ An automated method using embedded video metadata (`creation_time` and `timecode
 - Requires videos with accurate embedded timecode metadata (recommended for GoPro 12/13).  
 - Outputs JSON and CSV files with frame offsets per video.  
 - May suffer from drift and requires careful setup (e.g., GPS off or synced).
+
+## 1.3. Classification
+
+Processes and synchronizes multi-camera trial videos using filename timestamps or an optional synchronization JSON file. The system groups videos into trials based on timing proximity, trims them to ensure frame alignment, and re-encodes them in the selected format (e.g., `.mp4`).
+
+> **Important:**  
+> Theia requires all videos in a trial to have the same number of frames and to be re-encoded in a compatible format. This tool ensures that by trimming all videos in each trial to the shortest one, or using synchronization offsets (if provided) and further trimming them to the minimum valid range across all videos before re-encoding.
+
+The input of this module is Folder containing raw videos coming from video storage directory and pptional synchronization JSON file. 
+The output is Classified, synchronized, and re-encoded video sets per trial and camera, compatible with Theia requirements.
+### Steps
+
+- **Trial grouping:** Videos within 8 seconds of each other are grouped as one trial based on filename timestamps.  
+- **Optional synchronization:** Applies frame offsets from a synchronization JSON file to align videos temporally.  
+- **Trimming:**  
+  - Without a synchronization file, videos are trimmed to match the shortest video’s length in the trial.  
+  - With a synchronization file, trimming respects the provided frame offsets and defined start/end frame ranges, ensuring precise temporal alignment before further trimming all videos to the minimum valid frame range.  
+- **Re-encoding:** Videos are re-encoded in the selected output format to ensure compatibility with Theia.  
+- **Output:** Saves synchronized, trimmed, and re-encoded videos in trial- and camera-specific folders ready for Theia analysis.
