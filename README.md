@@ -209,7 +209,7 @@ The output is Classified, synchronized, and re-encoded video sets per trial and 
 
 ## 1.4 Calibration
 
-This module automates camera calibration (intrinsic and extrinsic parameters) essential for accurate 3D reconstruction and measurement from video data. It uses OpenCV and provides an interactive GUI for manual confirmation or selection of known 3D scene points, following a workflow similar to Pose2Sim.
+This module automates camera calibration (intrinsic and extrinsic parameters) essential for accurate 3D reconstruction and measurement from video data. It uses OpenCV and provides an interactive GUI for manual confirmation or selection of known 3D scene points, following a workflow similar to [Pose2Sim](https://github.com/perfanalytics/pose2sim) 
 
 ### 1.4.1 Calibration Workflow
 
@@ -237,5 +237,15 @@ This module automates camera calibration (intrinsic and extrinsic parameters) es
 - Future improvements include automatic pattern detection and integrated intrinsic calibration.
 
 <img src="Assets/Image5.png" alt="Go2Rep GUI" width="450" style="display: block; margin: auto;" /> <img src="Assets/Image6.png" alt="Go2Rep GUI" width="450" style="display: block; margin: auto;" />
+
+## 1.5 Markerless motion analysis
+Currently, this pipeline depends on Theia3D for the 3D pose estimation step. However, to reduce dependency and increase flexibility, it is desirable to develop an in-house markerless motion analysis solution.
+
+For 2D pose estimation, Sport 2D can be utilized, which supports real-time 2D pose analysis(combined with GoPro Preview module). For 3D pose estimation, Pose2Sim is a promising tool. Pose2Sim accepts videos of varying lengths that do not require prior calibration or synchronization.
+
+Since this pipeline generates synchronized videos with an identical number of frames and calibrated cameras, there is an opportunity to optimize Pose2Sim pipeline for this specific context. By leveraging the synchronized and calibrated videos, the Pose2Sim code can be restructured to perform pose estimation, person association, triangulation, and OpenSim simulation all within a single for-loop that iterates over the number of frames across all videos simultaneously.
+
+This optimization would significantly accelerate the Pose2Sim workflow, enabling faster and more efficient markerless 3D pose analysis tailored to synchronized multi-camera data.
+
 
 
