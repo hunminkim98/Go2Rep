@@ -177,7 +177,7 @@ A GUI-based tool with CUDA acceleration that lets users manually select matching
 - Works best when videos contain a clear synchronization event.  
 - Outputs offsets for temporal alignment of all videos.
 
-<img src="Assets/Image3.png" alt="Go2Rep GUI" width="1000" style="display: block; margin: auto;" />
+<img src="Assets/Image3.png" alt="Go2Rep GUI" width="600" style="display: block; margin: auto;" />
 
 ### 1.2.2 Timecode Synchronization
 
