@@ -3,9 +3,6 @@ Go2Rep is a GUI for multi-GoPro HERO (tested on GoPro 11/13) video collection an
 
 <img src="Assets/Image1.png" alt="Go2Rep GUI" width="1000">
 
-# Visual Process
-
-<img src="Assets/Image8.png" alt="Go2Rep GUI" width="300">
 
 # 0. Installation
 
@@ -116,6 +113,11 @@ This configures environment variables so `cl.exe` can be found.
      python main_gui.py
      ```
 # 1. Features
+
+# 1.0 Visual flow chart of Go2Rep
+
+<img src="Assets/Image8.png" alt="Go2Rep GUI" width="300"> 
+
 ## 1.1 GoPro Control
 Go2Rep provides a unified interface for controlling multiple or mono GoPro HERO cameras (tested on HERO11 and HERO13) over wireless connections.(via BLE,AP and COHN)  
 It handles the full workflow from discovery and connection to recording, previewing, downloading, and organizing videos.  
