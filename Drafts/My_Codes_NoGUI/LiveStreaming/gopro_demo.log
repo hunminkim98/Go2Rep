@@ -1,0 +1,22 @@
+   MainThread:12:38:24.672 util.py                                   210 DEBUG    | Send cmd --> netsh wlan show interfaces
+   MainThread:12:38:24.776 util.py                                   216 DEBUG    | Receive response --> 
+There is 1 interface on the system: 
+
+    Name                   : Wi-Fi
+    Description            : Intel(R) Wi-Fi 6E AX211 160MHz
+    GUID                   : 682fc790-eaf5-4eee-92dc-ab5eabd5b11c
+    Physical address       : 60:45:2e:1a:f7:7a
+    Interface type         : Primary
+    State                  : disconnected
+    Radio status           : Hardware On
+                             Software On
+
+    Hosted network status  : Not available
+
+
+   MainThread:12:38:24.776 wireless.py                                93 DEBUG    | Wifi setup. Using [WifiCli] driver::[Wi-Fi] interface
+   MainThread:12:38:24.776 bleak_wrapper.py                          121 INFO     | Scanning for GoPro [A-Z0-9]{4} bluetooth devices...
+   MainThread:12:38:25.289 gopro_wireless.py                         322 ERROR    | Error while opening: Thread is configured for Windows GUI but callbacks are not working.
+   MainThread:12:38:25.289 util.py                                   210 DEBUG    | Send cmd --> netsh wlan disconnect interface="Wi-Fi"
+   MainThread:12:38:25.373 util.py                                   216 DEBUG    | Receive response --> 
+

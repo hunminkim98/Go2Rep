@@ -1,0 +1,408 @@
+2025-06-03 11:49:55,722 - DEBUG - Send cmd --> netsh wlan show interfaces
+2025-06-03 11:49:55,807 - DEBUG - Receive response --> 
+There is 1 interface on the system: 
+
+    Name                   : Wi-Fi
+    Description            : Intel(R) Wi-Fi 6E AX211 160MHz
+    GUID                   : 682fc790-eaf5-4eee-92dc-ab5eabd5b11c
+    Physical address       : 60:45:2e:1a:f7:7a
+    Interface type         : Primary
+    State                  : disconnected
+    Radio status           : Hardware On
+                             Software On
+
+    Hosted network status  : Not available
+
+
+2025-06-03 11:49:55,807 - DEBUG - Wifi setup. Using [WifiCli] driver::[Wi-Fi] interface
+2025-06-03 11:49:55,807 - INFO - Scanning for GoPro [A-Z0-9]{4} bluetooth devices...
+2025-06-03 11:49:56,533 - DEBUG - Received 57:40:D4:5B:25:9E: .
+2025-06-03 11:49:57,145 - DEBUG - Received 57:40:D4:5B:25:9E: .
+2025-06-03 11:49:57,352 - DEBUG - Received 57:40:D4:5B:25:9E: .
+2025-06-03 11:49:57,828 - DEBUG - Received 14:13:0B:85:80:F1: .
+2025-06-03 11:49:57,828 - DEBUG - Received 14:13:0B:85:80:F1: .
+2025-06-03 11:49:58,198 - DEBUG - Received 57:40:D4:5B:25:9E: .
+2025-06-03 11:49:58,300 - DEBUG - Received 57:40:D4:5B:25:9E: .
+2025-06-03 11:49:58,647 - DEBUG - Received FE:74:69:80:9B:C7: T4R4S_TE-10218E.
+2025-06-03 11:49:58,657 - DEBUG - Received FE:74:69:80:9B:C7: .
+2025-06-03 11:49:58,915 - DEBUG - Received E4:DA:C3:55:20:B8: .
+2025-06-03 11:49:58,922 - DEBUG - Received E4:DA:C3:55:20:B8: GoPro 5220.
+2025-06-03 11:49:58,922 - INFO - 	Discovered: E4:DA:C3:55:20:B8: GoPro 5220
+2025-06-03 11:49:58,922 - DEBUG - 1 devices found. Watcher status: <BluetoothLEAdvertisementWatcherStatus.STOPPED: 3>.
+2025-06-03 11:49:58,922 - INFO - Found 1 matching devices.
+2025-06-03 11:49:58,922 - INFO - Establishing the BLE connection
+2025-06-03 11:49:58,922 - INFO - Establishing BLE connection to E4:DA:C3:55:20:B8: GoPro 5220...
+2025-06-03 11:49:58,949 - DEBUG - Connecting to BLE device @ E4:DA:C3:55:20:B8
+2025-06-03 11:49:59,091 - DEBUG - getting services (service_cache_mode=None, cache_mode=None)...
+2025-06-03 11:49:59,377 - DEBUG - session_status_changed_event_handler: id: BluetoothLE#BluetoothLE60:45:2e:1a:f7:7e-e4:da:c3:55:20:b8, error: <BluetoothError.SUCCESS: 0>, status: <GattSessionStatus.ACTIVE: 1>
+2025-06-03 11:49:59,377 - DEBUG - Attempting to pair...
+2025-06-03 11:49:59,497 - DEBUG - Pairing complete!
+2025-06-03 11:49:59,497 - INFO - Discovering characteristics...
+2025-06-03 11:49:59,497 - DEBUG - [Service] Generic Attribute Service
+2025-06-03 11:49:59,497 - DEBUG - [Service] Generic Access Service
+2025-06-03 11:49:59,497 - DEBUG - 	[Characteristic] Device Name @ handle 3: READ
+2025-06-03 11:49:59,497 - DEBUG - 	[Characteristic] Appearance @ handle 5: READ
+2025-06-03 11:49:59,497 - DEBUG - 	[Characteristic] Preferred Connection Parameters @ handle 7: READ
+2025-06-03 11:49:59,497 - DEBUG - [Service] Battery Service
+2025-06-03 11:50:00,106 - DEBUG - max_pdu_size_changed_handler: 517
+2025-06-03 11:50:00,225 - DEBUG - Read Descriptor 000C : bytearray(b'\x00\x00')
+2025-06-03 11:50:00,225 - DEBUG - 	[Characteristic] Battery Level @ handle 10: READ|NOTIFY
+2025-06-03 11:50:00,225 - DEBUG - [Service] Device Information Service
+2025-06-03 11:50:00,225 - DEBUG - 	[Characteristic] Manufacturer Name @ handle 14: READ
+2025-06-03 11:50:00,225 - DEBUG - 	[Characteristic] Model Number @ handle 16: READ
+2025-06-03 11:50:00,225 - DEBUG - 	[Characteristic] Serial Number @ handle 18: READ
+2025-06-03 11:50:00,225 - DEBUG - 	[Characteristic] Hardware Revision @ handle 20: READ
+2025-06-03 11:50:00,225 - DEBUG - 	[Characteristic] Firmware Revision @ handle 22: READ
+2025-06-03 11:50:00,225 - DEBUG - 	[Characteristic] Software Revision @ handle 24: READ
+2025-06-03 11:50:00,225 - DEBUG - 	[Characteristic] System ID @ handle 26: READ
+2025-06-03 11:50:00,225 - DEBUG - 	[Characteristic] PNP ID @ handle 28: READ
+2025-06-03 11:50:00,225 - DEBUG - [Service] Wifi Access Point Service
+2025-06-03 11:50:00,225 - DEBUG - 	[Characteristic] Wifi AP SSID @ handle 31: READ|WRITE_YES_RSP
+2025-06-03 11:50:00,225 - DEBUG - 	[Characteristic] Wifi AP Password @ handle 33: READ|WRITE_YES_RSP
+2025-06-03 11:50:00,225 - DEBUG - 	[Characteristic] Wifi Power @ handle 35: WRITE_YES_RSP
+2025-06-03 11:50:00,344 - DEBUG - Read Descriptor 0027 : bytearray(b'\x00\x00')
+2025-06-03 11:50:00,344 - DEBUG - 	[Characteristic] Wifi State @ handle 37: READ|INDICATE
+2025-06-03 11:50:00,344 - DEBUG - 	[Characteristic] CSI Password @ handle 40: READ
+2025-06-03 11:50:00,344 - DEBUG - [Service] Control and Query Service
+2025-06-03 11:50:00,344 - DEBUG - 	[Characteristic] Command @ handle 43: WRITE_YES_RSP
+2025-06-03 11:50:00,467 - DEBUG - Read Descriptor 002F : bytearray(b'\x00\x00')
+2025-06-03 11:50:00,467 - DEBUG - 	[Characteristic] Command Response @ handle 45: NOTIFY
+2025-06-03 11:50:00,467 - DEBUG - 	[Characteristic] Settings @ handle 48: WRITE_YES_RSP
+2025-06-03 11:50:00,579 - DEBUG - Read Descriptor 0034 : bytearray(b'\x00\x00')
+2025-06-03 11:50:00,579 - DEBUG - 	[Characteristic] Settings Response @ handle 50: NOTIFY
+2025-06-03 11:50:00,579 - DEBUG - 	[Characteristic] Query @ handle 53: WRITE_YES_RSP
+2025-06-03 11:50:00,702 - DEBUG - Read Descriptor 0039 : bytearray(b'\x00\x00')
+2025-06-03 11:50:00,702 - DEBUG - 	[Characteristic] Query Response @ handle 55: NOTIFY
+2025-06-03 11:50:00,702 - DEBUG - 	[Characteristic] Sensor @ handle 58: WRITE_YES_RSP
+2025-06-03 11:50:00,814 - DEBUG - Read Descriptor 003E : bytearray(b'\x00\x00')
+2025-06-03 11:50:00,814 - DEBUG - 	[Characteristic] Sensor Response @ handle 60: NOTIFY
+2025-06-03 11:50:00,814 - DEBUG - [Service] Camera Management Service
+2025-06-03 11:50:00,814 - DEBUG - 	[Characteristic] Camera Management @ handle 64: WRITE_YES_RSP
+2025-06-03 11:50:00,940 - DEBUG - Read Descriptor 0044 : bytearray(b'\x00\x00')
+2025-06-03 11:50:00,940 - DEBUG - 	[Characteristic] Camera Management Response @ handle 66: NOTIFY
+2025-06-03 11:50:00,940 - DEBUG - [Service] Unknown Service
+2025-06-03 11:50:01,051 - DEBUG - Read Descriptor 0048 : bytearray(b'\x00\x00')
+2025-06-03 11:50:01,051 - DEBUG - 	[Characteristic] Internal 81 @ handle 70: NOTIFY
+2025-06-03 11:50:01,051 - DEBUG - 	[Characteristic] Internal 82 @ handle 73: WRITE_YES_RSP
+2025-06-03 11:50:01,181 - DEBUG - Read Descriptor 004D : bytearray(b'\x00\x00')
+2025-06-03 11:50:01,181 - DEBUG - 	[Characteristic] Internal 83 @ handle 75: NOTIFY
+2025-06-03 11:50:01,306 - DEBUG - Read Descriptor 0050 : bytearray(b'\x00\x00')
+2025-06-03 11:50:01,306 - DEBUG - 	[Characteristic] Internal 84 @ handle 78: NOTIFY
+2025-06-03 11:50:01,306 - DEBUG - [Service] Tx Power Service
+2025-06-03 11:50:01,306 - DEBUG - 	[Characteristic] Tx Power Level @ handle 82: READ
+2025-06-03 11:50:01,306 - INFO - Done discovering characteristics!
+2025-06-03 11:50:01,306 - INFO - Enabling notifications...
+2025-06-03 11:50:01,306 - DEBUG - Enabling notification on char 00002a19-0000-1000-8000-00805f9b34fb
+2025-06-03 11:50:01,417 - DEBUG - Enabling notification on char b5f90073-aa8d-11e3-9046-0002a5d5c51b
+2025-06-03 11:50:01,544 - DEBUG - Enabling notification on char b5f90075-aa8d-11e3-9046-0002a5d5c51b
+2025-06-03 11:50:01,653 - DEBUG - Enabling notification on char b5f90077-aa8d-11e3-9046-0002a5d5c51b
+2025-06-03 11:50:01,786 - DEBUG - Enabling notification on char b5f90079-aa8d-11e3-9046-0002a5d5c51b
+2025-06-03 11:50:01,905 - DEBUG - Enabling notification on char b5f90092-aa8d-11e3-9046-0002a5d5c51b
+2025-06-03 11:50:02,021 - DEBUG - Enabling notification on char b5f90081-aa8d-11e3-9046-0002a5d5c51b
+2025-06-03 11:50:02,146 - DEBUG - Enabling notification on char b5f90083-aa8d-11e3-9046-0002a5d5c51b
+2025-06-03 11:50:02,261 - DEBUG - Enabling notification on char b5f90084-aa8d-11e3-9046-0002a5d5c51b
+2025-06-03 11:50:02,385 - INFO - Done enabling notifications
+2025-06-03 11:50:02,385 - INFO - 
+<<<<<<<<--------------
+    "id" : "QueryCmdId.REG_STATUS_VAL_UPDATE",
+    "status_id" : "StatusId.ENCODING",
+    "protocol" : "Protocol.BLE",
+    "uuid" : "Query",
+<<<<<<<<--------------
+
+2025-06-03 11:50:02,385 - DEBUG - Writing to [Query] UUID: 20:02:53:0a
+2025-06-03 11:50:02,385 - DEBUG - Writing to Query: b5f90076aa8d11e390460002a5d5c51b
+2025-06-03 11:50:02,500 - DEBUG - Received response on BleUUID [Query Response]: 05:53:00:0a:01:00
+2025-06-03 11:50:02,500 - INFO - 
+-------------->>>>>>>>
+    "id" : "QueryCmdId.REG_STATUS_VAL_UPDATE",
+    "status" : "ErrorCode.SUCCESS",
+    "protocol" : "Protocol.BLE",
+    "data" : {
+        "StatusId.ENCODING" : "False",
+    },
+-------------->>>>>>>>
+
+2025-06-03 11:50:02,500 - INFO - 
+<<<<<<<<--------------
+    "id" : "QueryCmdId.REG_STATUS_VAL_UPDATE",
+    "status_id" : "StatusId.BUSY",
+    "protocol" : "Protocol.BLE",
+    "uuid" : "Query",
+<<<<<<<<--------------
+
+2025-06-03 11:50:02,500 - DEBUG - Writing to [Query] UUID: 20:02:53:08
+2025-06-03 11:50:02,500 - DEBUG - Writing to Query: b5f90076aa8d11e390460002a5d5c51b
+2025-06-03 11:50:02,627 - DEBUG - Received response on BleUUID [Query Response]: 05:53:00:08:01:00
+2025-06-03 11:50:02,627 - INFO - 
+-------------->>>>>>>>
+    "id" : "QueryCmdId.REG_STATUS_VAL_UPDATE",
+    "status" : "ErrorCode.SUCCESS",
+    "protocol" : "Protocol.BLE",
+    "data" : {
+        "StatusId.BUSY" : "False",
+    },
+-------------->>>>>>>>
+
+2025-06-03 11:50:02,627 - INFO - BLE is ready!
+2025-06-03 11:50:02,627 - DEBUG - Looking up time zone info from registry
+2025-06-03 11:50:02,656 - INFO - 
+<<<<<<<<--------------
+    "id" : "CmdId.SET_DATE_TIME_DST",
+    "protocol" : "Protocol.BLE",
+    "uuid" : "Command",
+    "date_time" : "2025-06-03 11:50:02.656624+02:00",
+    "tz_offset" : "120",
+    "is_dst" : "True",
+<<<<<<<<--------------
+
+2025-06-03 11:50:02,656 - DEBUG - Writing to [Command] UUID: 20:0c:0f:0a:07:e9:06:03:0b:32:02:00:78:01
+2025-06-03 11:50:02,656 - DEBUG - Writing to Command: b5f90072aa8d11e390460002a5d5c51b
+2025-06-03 11:50:02,742 - DEBUG - Received response on BleUUID [Command Response]: 02:0f:00
+2025-06-03 11:50:02,742 - INFO - 
+-------------->>>>>>>>
+    "id" : "CmdId.SET_DATE_TIME_DST",
+    "status" : "ErrorCode.SUCCESS",
+    "protocol" : "Protocol.BLE",
+-------------->>>>>>>>
+
+2025-06-03 11:50:02,742 - INFO - 
+<<<<<<<<--------------
+    "id" : "CmdId.GET_THIRD_PARTY_API_VERSION",
+    "protocol" : "Protocol.BLE",
+    "uuid" : "Command",
+<<<<<<<<--------------
+
+2025-06-03 11:50:02,742 - DEBUG - Writing to [Command] UUID: 20:01:51
+2025-06-03 11:50:02,742 - DEBUG - Writing to Command: b5f90072aa8d11e390460002a5d5c51b
+2025-06-03 11:50:02,862 - DEBUG - Received response on BleUUID [Command Response]: 06:51:00:01:02:01:00
+2025-06-03 11:50:02,862 - INFO - 
+-------------->>>>>>>>
+    "id" : "CmdId.GET_THIRD_PARTY_API_VERSION",
+    "status" : "ErrorCode.SUCCESS",
+    "protocol" : "Protocol.BLE",
+    "data" : "2.0",
+-------------->>>>>>>>
+
+2025-06-03 11:50:02,867 - INFO - Using Open GoPro API version 2.0
+2025-06-03 11:50:02,867 - INFO - Discovering Wifi AP info and enabling via BLE
+2025-06-03 11:50:02,867 - DEBUG - Reading from Wifi AP Password
+2025-06-03 11:50:02,974 - DEBUG - Read Characteristic 0021 : bytearray(b'TgQ-9yR-K6Q')
+2025-06-03 11:50:02,974 - DEBUG - Received response on BleUUID [Wifi AP Password]: 54:67:51:2d:39:79:52:2d:4b:36:51
+2025-06-03 11:50:02,974 - DEBUG - Reading from Wifi AP Password
+2025-06-03 11:50:02,974 - DEBUG - Reading from Wifi AP SSID
+2025-06-03 11:50:03,105 - DEBUG - Read Characteristic 001F : bytearray(b'CAMERA08')
+2025-06-03 11:50:03,105 - DEBUG - Received response on BleUUID [Wifi AP SSID]: 43:41:4d:45:52:41:30:38
+2025-06-03 11:50:03,105 - DEBUG - Reading from Wifi AP SSID
+2025-06-03 11:50:03,105 - INFO - 
+<<<<<<<<--------------
+    "id" : "CmdId.SET_WIFI",
+    "protocol" : "Protocol.BLE",
+    "uuid" : "Command",
+    "enable" : "True",
+<<<<<<<<--------------
+
+2025-06-03 11:50:03,105 - DEBUG - Writing to [Command] UUID: 20:03:17:01:01
+2025-06-03 11:50:03,105 - DEBUG - Writing to Command: b5f90072aa8d11e390460002a5d5c51b
+2025-06-03 11:50:03,226 - DEBUG - Received response on BleUUID [Command Response]: 02:17:00
+2025-06-03 11:50:03,226 - INFO - 
+-------------->>>>>>>>
+    "id" : "CmdId.SET_WIFI",
+    "status" : "ErrorCode.SUCCESS",
+    "protocol" : "Protocol.BLE",
+-------------->>>>>>>>
+
+2025-06-03 11:50:03,226 - INFO - Establishing Wifi connection to CAMERA08
+2025-06-03 11:50:03,226 - INFO - Attempting to establish Wifi connection to CAMERA08...
+2025-06-03 11:50:03,226 - DEBUG - Send cmd --> netsh wlan disconnect
+2025-06-03 11:50:03,313 - DEBUG - Receive response --> 
+
+2025-06-03 11:50:03,313 - DEBUG - Send cmd --> netsh wlan delete profile name="CAMERA08"
+2025-06-03 11:50:03,401 - DEBUG - Receive response --> Profile "CAMERA08" is deleted from interface "Wi-Fi".
+
+2025-06-03 11:50:03,401 - DEBUG - Using template <?xml version="1.0"?>
+<WLANProfile xmlns="http://www.microsoft.com/networking/WLAN/profile/v1">
+    <name>CAMERA08</name>
+    <SSIDConfig>
+        <SSID>
+            <name>CAMERA08</name>
+        </SSID>
+    </SSIDConfig>
+    <connectionType>ESS</connectionType>
+    <connectionMode>manual</connectionMode>
+    <MSM>
+        <security>
+            <authEncryption>
+                <authentication>WPA2PSK</authentication>
+                <encryption>AES</encryption>
+                <useOneX>false</useOneX>
+            </authEncryption>
+            <sharedKey>
+                <keyType>passPhrase</keyType>
+                <protected>false</protected>
+                <keyMaterial>TgQ-9yR-K6Q</keyMaterial>
+            </sharedKey>
+        </security>
+    </MSM>
+    <MacRandomization xmlns="http://www.microsoft.com/networking/WLAN/profile/v3">
+        <enableRandomization>false</enableRandomization>
+    </MacRandomization>
+</WLANProfile>
+2025-06-03 11:50:03,401 - DEBUG - Send cmd --> netsh wlan add profile filename=C:\Users\admin\AppData\Local\Temp\tmptwlobadb
+2025-06-03 11:50:03,518 - DEBUG - Receive response --> Profile CAMERA08 is added on interface Wi-Fi.
+
+2025-06-03 11:50:03,518 - DEBUG - Send cmd --> netsh wlan connect ssid="CAMERA08" name="CAMERA08" interface="Wi-Fi"
+2025-06-03 11:50:03,607 - DEBUG - Receive response --> Connection request was completed successfully.
+
+2025-06-03 11:50:03,623 - DEBUG - Send cmd --> netsh wlan show interfaces
+2025-06-03 11:50:03,702 - DEBUG - Receive response --> 
+There is 1 interface on the system: 
+
+    Name                   : Wi-Fi
+    Description            : Intel(R) Wi-Fi 6E AX211 160MHz
+    GUID                   : 682fc790-eaf5-4eee-92dc-ab5eabd5b11c
+    Physical address       : 60:45:2e:1a:f7:7a
+    Interface type         : Primary
+    State                  : associating
+    Radio status           : Hardware On
+                             Software On
+
+    Hosted network status  : Not available
+
+
+2025-06-03 11:50:03,702 - DEBUG - Waiting 1 second for Wi-Fi connection to establish...
+2025-06-03 11:50:04,709 - DEBUG - Send cmd --> netsh wlan show interfaces
+2025-06-03 11:50:04,828 - DEBUG - Receive response --> 
+There is 1 interface on the system: 
+
+    Name                   : Wi-Fi
+    Description            : Intel(R) Wi-Fi 6E AX211 160MHz
+    GUID                   : 682fc790-eaf5-4eee-92dc-ab5eabd5b11c
+    Physical address       : 60:45:2e:1a:f7:7a
+    Interface type         : Primary
+    State                  : connected
+    SSID                   : CAMERA08
+    AP BSSID               : 26:74:f7:f6:e0:78
+    Band                   : 5 GHz
+    Channel                : 161
+    Network type           : Infrastructure
+    Radio type             : 802.11ac
+    Authentication         : WPA2-Personal
+    Cipher                 : CCMP
+    Connection mode        : Profile
+    Receive rate (Mbps)    : 433.3
+    Transmit rate (Mbps)   : 433.3
+    Signal                 : 89% 
+    Profile                : CAMERA08 
+    QoS MSCS Configured         : 0
+    QoS Map Configured          : 0
+    QoS Map Allowed by Policy   : 0
+
+    Hosted network status  : Not available
+
+
+2025-06-03 11:50:04,828 - INFO - Wifi connection established!
+2025-06-03 11:50:04,828 - DEBUG - Sending:  http://10.5.5.9:8080/gopro/camera/stream/stop
+2025-06-03 11:50:04,828 - INFO - 
+<<<<<<<<--------------
+    "id" : "Preview Stream",
+    "protocol" : "Protocol.HTTP",
+    "endpoint" : "gopro/camera/stream",
+    "mode" : "stop",
+    "port" : "None",
+<<<<<<<<--------------
+
+2025-06-03 11:50:04,829 - DEBUG - Starting new HTTP connection (1): 10.5.5.9:8080
+2025-06-03 11:50:07,905 - DEBUG - http://10.5.5.9:8080 "GET /gopro/camera/stream/stop HTTP/1.1" 200 3
+2025-06-03 11:50:07,907 - INFO - 
+-------------->>>>>>>>
+    "id" : "http://10.5.5.9:8080/gopro/camera/stream/stop",
+    "status" : "ErrorCode.SUCCESS",
+    "protocol" : "Protocol.HTTP",
+-------------->>>>>>>>
+
+2025-06-03 11:50:07,907 - INFO - 
+<<<<<<<<--------------
+    "id" : "CmdId.SET_SHUTTER",
+    "protocol" : "Protocol.BLE",
+    "uuid" : "Command",
+    "shutter" : "Toggle.DISABLE",
+<<<<<<<<--------------
+
+2025-06-03 11:50:07,907 - DEBUG - Writing to [Command] UUID: 20:03:01:01:00
+2025-06-03 11:50:07,907 - DEBUG - Writing to Command: b5f90072aa8d11e390460002a5d5c51b
+2025-06-03 11:50:07,907 - DEBUG - Received response on BleUUID [Query Response]: 08:93:00:08:01:00:0a:01:00
+2025-06-03 11:50:07,907 - INFO - 
+----ASYNC----->>>>>>>>
+    "id" : "QueryCmdId.STATUS_VAL_PUSH",
+    "status" : "ErrorCode.SUCCESS",
+    "protocol" : "Protocol.BLE",
+    "data" : {
+        "StatusId.BUSY" : "False",
+        "StatusId.ENCODING" : "False",
+    },
+----ASYNC----->>>>>>>>
+
+2025-06-03 11:50:08,446 - DEBUG - Received response on BleUUID [Command Response]: 02:01:02
+2025-06-03 11:50:08,446 - INFO - 
+-------------->>>>>>>>
+    "id" : "CmdId.SET_SHUTTER",
+    "status" : "ErrorCode.INVALID_PARAM",
+    "protocol" : "Protocol.BLE",
+-------------->>>>>>>>
+
+2025-06-03 11:50:08,446 - WARNING - Received non-success status: ErrorCode.INVALID_PARAM
+2025-06-03 11:50:08,446 - DEBUG - Sending:  http://10.5.5.9:8080/gopro/camera/stream/start?port=8554
+2025-06-03 11:50:08,446 - INFO - 
+<<<<<<<<--------------
+    "id" : "Preview Stream",
+    "protocol" : "Protocol.HTTP",
+    "endpoint" : "gopro/camera/stream",
+    "mode" : "start",
+    "port" : "8554",
+<<<<<<<<--------------
+
+2025-06-03 11:50:08,446 - DEBUG - Starting new HTTP connection (1): 10.5.5.9:8080
+2025-06-03 11:50:08,524 - DEBUG - http://10.5.5.9:8080 "GET /gopro/camera/stream/start?port=8554 HTTP/1.1" 200 3
+2025-06-03 11:50:08,524 - INFO - 
+-------------->>>>>>>>
+    "id" : "http://10.5.5.9:8080/gopro/camera/stream/start?port=8554",
+    "status" : "ErrorCode.SUCCESS",
+    "protocol" : "Protocol.HTTP",
+-------------->>>>>>>>
+
+2025-06-03 11:50:19,895 - DEBUG - Sending:  http://10.5.5.9:8080/gopro/camera/stream/stop
+2025-06-03 11:50:19,895 - INFO - 
+<<<<<<<<--------------
+    "id" : "Preview Stream",
+    "protocol" : "Protocol.HTTP",
+    "endpoint" : "gopro/camera/stream",
+    "mode" : "stop",
+    "port" : "None",
+<<<<<<<<--------------
+
+2025-06-03 11:50:19,897 - DEBUG - Starting new HTTP connection (1): 10.5.5.9:8080
+2025-06-03 11:50:20,349 - DEBUG - http://10.5.5.9:8080 "GET /gopro/camera/stream/stop HTTP/1.1" 200 3
+2025-06-03 11:50:20,349 - INFO - 
+-------------->>>>>>>>
+    "id" : "http://10.5.5.9:8080/gopro/camera/stream/stop",
+    "status" : "ErrorCode.SUCCESS",
+    "protocol" : "Protocol.HTTP",
+-------------->>>>>>>>
+
+2025-06-03 11:50:20,349 - INFO - Terminating the BLE connection
+2025-06-03 11:50:20,349 - INFO - Disconnecting...
+2025-06-03 11:50:20,349 - DEBUG - Disconnecting from BLE device...
+2025-06-03 11:50:23,571 - DEBUG - max_pdu_size_changed_handler: 23
+2025-06-03 11:50:23,571 - DEBUG - session_status_changed_event_handler: id: BluetoothLE#BluetoothLE60:45:2e:1a:f7:7e-e4:da:c3:55:20:b8, error: <BluetoothError.SUCCESS: 0>, status: <GattSessionStatus.CLOSED: 0>
+2025-06-03 11:50:23,571 - DEBUG - closing requester
+2025-06-03 11:50:23,571 - DEBUG - closing session
+2025-06-03 11:50:23,571 - INFO - Device disconnected!
+2025-06-03 11:50:23,571 - INFO - Terminating the Wifi connection
+2025-06-03 11:50:23,571 - DEBUG - Send cmd --> netsh wlan disconnect interface="Wi-Fi"
+2025-06-03 11:50:23,681 - DEBUG - Receive response --> Disconnection request was completed successfully for interface "Wi-Fi".
+
+2025-06-03 11:50:23,684 - INFO - Terminating the Wifi connection
+2025-06-03 11:50:23,684 - DEBUG - Send cmd --> netsh wlan disconnect interface="Wi-Fi"
+2025-06-03 11:50:24,193 - DEBUG - Receive response --> 
+
