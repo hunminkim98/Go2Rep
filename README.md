@@ -56,6 +56,62 @@ Open CMD and type:
 ```bash
 python --version
 ```
+If you get `'python' is not recognized`, proceed to the next step.
+
+2. **Install Python**  
+Download Python from [https://www.python.org/downloads/](https://www.python.org/downloads/)  
+During installation, **make sure to check the box:**  
+> Add Python to PATH  
+before clicking **Install Now**.
+
+3. **Add Python to PATH manually (if needed)**  
+- Open:  
+  `Control Panel > System > Advanced system settings > Environment Variables`  
+- Under **System variables**, select **Path** and click **Edit**.  
+- Click **New** and add the folder path where `python.exe` is installed, for example:  
+  ```
+  C:\ProgramData\anaconda3
+  ```
+  python --version
+  ```
+4. **Restart Command Prompt and verify**  
+- Run:    
+  `Control Panel > System > Advanced system settings > Environment Variables`  
+- Under **System variables**, select **Path** and click **Edit**.  
+- Click **New** and add the folder path where `python.exe` is installed, for example:  
+  ```
+  C:\ProgramData\anaconda3
+  ```
+  python --version
+  ```
+### Problem 2: `nvcc compilation failed / Cannot find compiler 'cl.exe' in PATH`
+
+**Cause:**  
+CUDA’s `nvcc` compiler needs the Microsoft C++ compiler (`cl.exe`), which isn’t found in your system PATH.
+
+**Solution:**
+
+1. **Install Visual Studio with C++ Build Tools**  
+Download Visual Studio from [https://visualstudio.microsoft.com/](https://visualstudio.microsoft.com/)  
+During installation, select the workload:  
+> Desktop development with C++
+
+2. **Activate Visual Studio environment variables**  
+Open a command prompt and activate your conda environment:
+ ```
+conda activate Go2Rep
+cd C:\ProgramData\anaconda3\envs\Go2Rep\Lib\site-packages\Go2Rep
+ ```
+Then run the Visual Studio environment setup script: 
+ ```
+"C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
+ ```
+This configures environment variables so `cl.exe` can be found.
+
+3. **Run your GUI script**
+     ```bash
+     python main_gui.py
+     ```
 # 1. Features
 ## 1.1 GoPro Control
 Go2Rep provides a unified interface for controlling multiple or mono GoPro HERO cameras (tested on HERO11 and HERO13) over wireless connections.(via BLE,AP and COHN)  
