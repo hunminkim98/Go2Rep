@@ -178,6 +178,7 @@ A GUI-based tool with CUDA acceleration that lets users manually select matching
 - Outputs offsets for temporal alignment of all videos.
 
 <img src="Assets/Image3.png" alt="Go2Rep GUI" width="600" style="display: block; margin: auto;" />
+<img src="Assets/Image4.png" alt="Go2Rep GUI" width="600" style="display: block; margin: auto;" />
 
 ### 1.2.2 Timecode Synchronization
 
@@ -235,5 +236,8 @@ This module automates camera calibration (intrinsic and extrinsic parameters) es
 - Depends on quality of calibration points and proper configuration.
 - Intrinsic calibration must be provided externally (via Pose2Sim).
 - Future improvements include automatic pattern detection and integrated intrinsic calibration.
+
+<img src="Assets/Image5.png" alt="Go2Rep GUI" width="600" style="display: block; margin: auto;" />
+<img src="Assets/Image6.png" alt="Go2Rep GUI" width="600" style="display: block; margin: auto;" />
 
 
