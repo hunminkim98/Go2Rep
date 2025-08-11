@@ -247,5 +247,5 @@ Since this pipeline generates synchronized videos with an identical number of fr
 
 This optimization would significantly accelerate the Pose2Sim workflow, enabling faster and more efficient markerless 3D pose analysis tailored to synchronized multi-camera data.
 
-
+<img src="Assets/gif1.gif" alt="Calibration GIF" width="450" style="display: block; margin: auto;" />
 
