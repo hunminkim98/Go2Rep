@@ -84,7 +84,8 @@ before clicking **Install Now**.
   ```
   python --version
   ```
-### Problem 2: `nvcc compilation failed / Cannot find compiler 'cl.exe' in PATH`
+### Problem 2: 
+**`nvcc compilation failed / Cannot find compiler 'cl.exe' in PATH`**
 
 **Cause:**  
 CUDA’s `nvcc` compiler needs the Microsoft C++ compiler (`cl.exe`), which isn’t found in your system PATH.
