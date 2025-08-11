@@ -102,3 +102,27 @@ Key capabilities include:
     </tr>
   </tbody>
 </table>
+
+## 1.2. Synchronization
+
+The synchronization feature aligns multiple videos recorded during the same trial to enable frame-accurate analysis across cameras. It supports two main methods:
+
+### 1.1.1 Manual Synchronization
+
+A GUI-based tool with CUDA acceleration that lets users manually select matching frames across videos. Videos are grouped by timestamped filenames and users pick a reference video, define a frame range, then visually select corresponding frames in other videos to calculate frame offsets. The output is a JSON file listing frame offsets per video.
+
+**Key points:**
+
+- Requires manual frame selection aided by real-time CUDA video processing.  
+- Works best when videos contain a clear synchronization event.  
+- Outputs offsets for temporal alignment of all videos.
+
+### 1.1.2 Timecode Synchronization
+
+An automated method using embedded video metadata (`creation_time` and `timecode`) extracted via `ffprobe`. Videos are grouped by filename timestamps, and synchronization offsets are calculated by comparing each video’s start timecode to the earliest one.
+
+**Key points:**
+
+- Requires videos with accurate embedded timecode metadata (recommended for GoPro 12/13).  
+- Outputs JSON and CSV files with frame offsets per video.  
+- May suffer from drift and requires careful setup (e.g., GPS off or synced).
