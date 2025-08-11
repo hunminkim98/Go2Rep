@@ -3,6 +3,10 @@ Go2Rep is a GUI for multi-GoPro HERO (tested on GoPro 11/13) video collection an
 
 <img src="Assets/Image1.png" alt="Go2Rep GUI" width="1000">
 
+# Visual Process
+
+<img src="Assets/Image8.png" alt="Go2Rep GUI" width="1000">
+
 # 0. Installation
 
 ## Installation via Anaconda
