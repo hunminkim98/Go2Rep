@@ -58,13 +58,13 @@ python --version
 ```
 # 1. Features
 ## 1.1 GoPro Control
-Go2Rep provides a unified interface for controlling multiple GoPro HERO cameras (tested on HERO11 and HERO13) over wireless connections.  
+Go2Rep provides a unified interface for controlling multiple or mono GoPro HERO cameras (tested on HERO11 and HERO13) over wireless connections.(via BLE,AP and COHN)  
 It handles the full workflow from discovery and connection to recording, downloading, and organizing videos.  
 The application automatically adapts its communication method based on the camera model, ensuring the correct protocol is used for reliable control and media transfer.
 
 Key capabilities include:
-- **Camera discovery** via Bluetooth or COHN
-- **Connection management** for one or more GoPros
+- **Camera discovery** via Bluetooth 
+- **Connection management** (via BLE,AP and COHN)
 - **Recording controls** (start/stop, FPS, resolution)
 - **Automatic media collection** with proper handling of encrypted downloads
 - **Model-specific workflows** to match protocol and provisioning requirements
