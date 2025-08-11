@@ -17,10 +17,10 @@ Key capabilities include:
 - **Model-specific workflows** to match protocol and provisioning requirements
 
 ---
-
-| Feature                | GoPro 11 or older | GoPro 13 / 12   |
-|------------------------|-------------------|-----------------|
-| **Protocols Used**     | BLE + WiFi AP     | HTTPS via COHN  |
-| **Certificate Provisioning** | ❌ Not Required  | ✅ Required     |
-| **Preview & Streaming**| Supported via WiFi AP | Supported via COHN* |
-| **Media Download**     | Basic via BLE + WiFi | Encrypted via HTTPS |
+            
+            | Feature                | GoPro 11 or older | GoPro 13 / 12   |
+            |------------------------|-------------------|-----------------|
+            | **Protocols Used**     | BLE + WiFi AP     | HTTPS via COHN  |
+            | **Certificate Provisioning** | ❌ Not Required  | ✅ Required     |
+            | **Preview & Streaming**| Supported via WiFi AP | Supported via COHN* |
+            | **Media Download**     | Basic via BLE + WiFi | Encrypted via HTTPS |
