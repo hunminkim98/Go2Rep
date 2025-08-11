@@ -251,7 +251,7 @@ This optimization would significantly accelerate the Pose2Sim workflow, enabling
 
 ## 1.6 Report Generator
 
-This module processes motion capture data to extract biomechanical metrics and generate visual reports.
+This module processes motion capture data(theia output) to extract biomechanical metrics and generate visual reports.
 
 ###  Process
 
