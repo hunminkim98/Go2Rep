@@ -472,7 +472,7 @@ class GoProControllerGUI:
         # --- Naming Convention ---
         qr_label = tk.Label(
             container,
-            text='Naming Convention:\n  oMBASE="[yyyymmdd]_[HHMMSS]-CAMERA02-"',
+            text='Naming Convention:\n  oMBASE="[yyyymmdd_HHMMSS]-CAMERA02-"',
             font=("Courier", 9),
             justify="left",
             anchor="w"
