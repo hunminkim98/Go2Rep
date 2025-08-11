@@ -18,8 +18,7 @@ Key capabilities include:
 
 ---
             
-<div style="text-align: center;">
-  <table border="1" cellspacing="0" cellpadding="6" style="display: inline-table;">
+  <table border="5" cellspacing="0" cellpadding="6" style="display: inline-table;">
   <thead>
     <tr>
       <th>Feature</th>
@@ -50,4 +49,3 @@ Key capabilities include:
     </tr>
   </tbody>
 </table>
-</div>
