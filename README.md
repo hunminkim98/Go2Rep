@@ -55,7 +55,7 @@ Python is either not installed or its path is not added to the system’s PATH v
 Open CMD and type:  
 ```bash
 python --version
----
+```
 ## GoPro Control
 Go2Rep provides a unified interface for controlling multiple GoPro HERO cameras (tested on HERO11 and HERO13) over wireless connections.  
 It handles the full workflow from discovery and connection to recording, downloading, and organizing videos.  
