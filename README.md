@@ -71,7 +71,6 @@ before clicking **Install Now**.
 - Click **New** and add the folder path where `python.exe` is installed, for example:  
   ```
   C:\ProgramData\anaconda3
-  ```
   python --version
   ```
 4. **Restart Command Prompt and verify**  
@@ -81,7 +80,6 @@ before clicking **Install Now**.
 - Click **New** and add the folder path where `python.exe` is installed, for example:  
   ```
   C:\ProgramData\anaconda3
-  ```
   python --version
   ```
 ### Problem 2: 
