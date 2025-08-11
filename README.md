@@ -103,6 +103,8 @@ Key capabilities include:
   </tbody>
 </table>
 
+<img src="Assets/Image2.png" alt="Go2Rep GUI" width="600">
+
 ## 1.2. Synchronization
 
 The synchronization feature aligns multiple videos recorded during the same trial to enable frame-accurate analysis across cameras. It supports two main methods:
