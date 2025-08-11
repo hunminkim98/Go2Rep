@@ -3,7 +3,58 @@ Go2Rep is a GUI for multi-GoPro HERO (tested on GoPro 11/13) video collection an
 
 <img src="Assets/Image1.png" alt="Go2Rep GUI" width="1000">
 
+# 0. Installation
 
+## Installation via Anaconda
+
+1. Click on the installation link: [XXXX] (Replace this with your actual link.)
+
+2. Add Go2Rep to your Anaconda environment:
+   - Navigate to:  
+     `C:\ProgramData\anaconda3\envs\`
+   - Locate your environment folder (e.g., `Go2Rep`).
+   - Ensure that Go2Rep is properly placed in:  
+     `C:\ProgramData\anaconda3\envs\Go2Rep\Lib\site-packages\Go2Rep`
+
+3. Launch the GUI:
+   - Open the terminal or Anaconda Prompt.
+   - Navigate to the folder:  
+     ```bash
+     cd C:\ProgramData\anaconda3\envs\Go2Rep\Lib\site-packages\Go2Rep
+     ```
+   - Activate Go2Rep environment:  
+     ```bash
+     conda activate Go2Rep
+     ```
+   - Run the following command:  
+     ```bash
+     python main_gui.py
+     ```
+
+## Download the Example Project
+
+If you want, you can download the Go2Rep example by clicking on this link (replace XXX with your actual download link):  
+[Download link: XXX]
+
+After downloading, extract and place the contents into the following directory:  
+`C:\ProgramData\anaconda3\envs\Go2Rep\Lib\site-packages\Go2Rep\Example_Go2Rep`
+
+---
+
+## Troubleshooting of Anaconda Installation
+
+### Problem 1  
+**'python' is not recognized as an internal or external command**
+
+**Cause:**  
+Python is either not installed or its path is not added to the system’s PATH variable.
+
+**Solution:**
+
+**Step 1: Check if Python is installed**  
+Open CMD and type:  
+```bash
+python --version
 ## GoPro Control
 Go2Rep provides a unified interface for controlling multiple GoPro HERO cameras (tested on HERO11 and HERO13) over wireless connections.  
 It handles the full workflow from discovery and connection to recording, downloading, and organizing videos.  
