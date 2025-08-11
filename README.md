@@ -18,7 +18,7 @@ Key capabilities include:
 
 ---
             
-  <table border="5" cellspacing="0" cellpadding="6" style="display: inline-table;">
+<table border="1" cellspacing="0" cellpadding="6" style="margin-left: auto; margin-right: auto; display: block;">
   <thead>
     <tr>
       <th>Feature</th>
