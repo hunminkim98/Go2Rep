@@ -198,9 +198,8 @@ Processes and synchronizes multi-camera trial videos using filename timestamps o
 
 The input of this module is Folder containing raw videos coming from video storage directory and pptional synchronization JSON file. 
 The output is Classified, synchronized, and re-encoded video sets per trial and camera, compatible with Theia requirements.
-### Steps
+### Keypoints
 
-- **Trial grouping:** Videos within 8 seconds of each other are grouped as one trial based on filename timestamps.  
 - **Optional synchronization:** Applies frame offsets from a synchronization JSON file to align videos temporally.  
 - **Trimming:**  
   - Without a synchronization file, videos are trimmed to match the shortest video’s length in the trial.  
