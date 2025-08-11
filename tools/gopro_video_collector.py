@@ -244,14 +244,14 @@ def get_media_list(formats=None):
     response = requests.get(GOPRO_BASE_URL, timeout=10)
     response.raise_for_status()
     soup = BeautifulSoup(response.text, 'html.parser')
-
+    breakpoint()
     media_data = []
     for row in soup.find_all('tr'):
         columns = row.find_all('td')
         if len(columns) >= 2:
             link = columns[0].find('a', href=True)
             date_text = columns[1].get_text(strip=True)
-
+            
             if link and date_text and date_text != "-":
                 try:
                     dt = datetime.strptime(date_text, "%d-%b-%Y %H:%M")
@@ -436,6 +436,7 @@ def download_selected_media(selected_date, start_hour, end_hour, Video_Source_fo
             else:
                 print(f"File already exists: {destination_path}, skipping download.")
     elif filename_convention == 1:
+        breakpoint()
         for file in files_to_download:
             base_name = os.path.basename(file)
             match = re.search(r'(GX\d{6})\.\w+$', base_name, re.IGNORECASE)
@@ -476,19 +477,37 @@ def download_selected_media(selected_date, start_hour, end_hour, Video_Source_fo
                 ((f, date_str, hour_str) for f, date_str, hour_str in media_files if gopro_file_identifier in f),
                 None
             )
-            
-            if matching_entry:
-                _, date_str, hour_str = matching_entry
-                dt_obj = datetime.strptime(f"{date_str} {hour_str}", "%d-%b-%Y %H:%M")
-                if gopro_file_identifier:
-                    new_name = f"{dt_obj.strftime('%Y%m%d_%H%M%S')}-GoPro{identifier}-{gopro_file_identifier}{Path(temp_path).suffix}"
-                else:
-                    new_name = f"{dt_obj.strftime('%Y%m%d_%H%M%S')}-GoPro{identifier}-{base_name}"
-                final_path = os.path.join(Video_Source_folder, new_name)
-                os.rename(temp_path, final_path)
-                logger.info(f"Renamed to: {final_path}")
+      
+            # Try extracting datetime from base_name
+            date_time_match = re.match(r'(\d{8})_(\d{6})', base_name)
+            if date_time_match:
+                # ✅ Extracted from filename
+                date_part, time_part = date_time_match.groups()
+                dt_obj = datetime.strptime(f"{date_part}_{time_part}", "%Y%m%d_%H%M%S")
             else:
-                logger.warning(f"No metadata match found for {file}; file left as-is.")
+                # ❌ Fall back to metadata
+                matching_entry = next(
+                    ((f, date_str, hour_str) for f, date_str, hour_str in media_files if gopro_file_identifier and gopro_file_identifier in f),
+                    None
+                )
+                if matching_entry:
+                    _, date_str, hour_str = matching_entry
+                    dt_obj = datetime.strptime(f"{date_str} {hour_str}", "%d-%b-%Y %H:%M")
+                    logger.warning(f"Could not extract time from '{base_name}', using metadata hour_str={hour_str}")
+                else:
+                    logger.warning(f"No time found for '{base_name}', leaving file as-is.")
+                    continue
+            
+            # Rename
+            if gopro_file_identifier:
+                new_name = f"{dt_obj.strftime('%Y%m%d_%H%M%S')}-GoPro{identifier}-{gopro_file_identifier}{Path(temp_path).suffix}"
+            else:
+                new_name = f"{dt_obj.strftime('%Y%m%d_%H%M%S')}-GoPro{identifier}-{base_name}"
+            
+            final_path = os.path.join(Video_Source_folder, new_name)
+            os.rename(temp_path, final_path)
+            logger.info(f"Renamed to: {final_path}")
+            
     return filesFound
     
 
