@@ -102,6 +102,7 @@ Key capabilities include:
     </tr>
   </tbody>
 </table>
+*Not implemented so far
 
 <img src="Assets/Image2.png" alt="Go2Rep GUI" width="600">
 
