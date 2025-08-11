@@ -249,3 +249,22 @@ This optimization would significantly accelerate the Pose2Sim workflow, enabling
 
 <img src="Assets/gif1.gif" alt="Calibration GIF" width="450" style="display: block; margin: auto;" />
 
+## 1.6 Report Generator
+
+This module processes motion capture data to extract biomechanical metrics and generate visual reports.
+
+###  Process
+
+The process loads motion capture data from a **Theia `.c3d`** file alongside corresponding segment information from a **`.json`** file.  
+It extracts key biomechanical parameters, including:
+
+- **Joint angles** over time
+- **Segment lengths**
+- **Distal marker positions**
+
+### Outputs
+
+- **`.trc`** – distal marker positions  
+- **`.csv`** – joint angles over time  
+- **Multi-page `.pdf`** – plots of joint angles
+
