@@ -35,7 +35,7 @@ Go2Rep is a GUI for multi-GoPro HERO (tested on GoPro 11/13) video collection an
 ## Download the Example Project
 
 If you want, you can download the Go2Rep example by clicking on this link (replace XXX with your actual download link):  
-[Download link: XXX]
+[Download link: [Link1](https://drive.google.com/file/d/1Wv62sN7fTf5F5CKy3CZ9Czl1zty_tcOg/view?usp=sharing)] 
 
 After downloading, extract and place the contents into the following directory:  
 `C:\ProgramData\anaconda3\envs\Go2Rep\Lib\site-packages\Go2Rep\Example_Go2Rep`
