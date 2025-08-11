@@ -244,7 +244,6 @@ def get_media_list(formats=None):
     response = requests.get(GOPRO_BASE_URL, timeout=10)
     response.raise_for_status()
     soup = BeautifulSoup(response.text, 'html.parser')
-    breakpoint()
     media_data = []
     for row in soup.find_all('tr'):
         columns = row.find_all('td')
@@ -436,7 +435,6 @@ def download_selected_media(selected_date, start_hour, end_hour, Video_Source_fo
             else:
                 print(f"File already exists: {destination_path}, skipping download.")
     elif filename_convention == 1:
-        breakpoint()
         for file in files_to_download:
             base_name = os.path.basename(file)
             match = re.search(r'(GX\d{6})\.\w+$', base_name, re.IGNORECASE)
