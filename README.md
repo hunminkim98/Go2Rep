@@ -193,7 +193,7 @@ An automated method using embedded video metadata (`creation_time` and `timecode
 - Requires videos with accurate embedded timecode metadata (Only recommended for GoPro 12/13).
 - Requires scanning the Precision Time QR codes or using time synchronization from GoPro Quik to obtain highly accurate timestamp alignment across cameras. This step ensures sub-frame synchronization precision by leveraging GoPro's Precision Time protocol documented at GoPro Precision Time.
 - Outputs JSON and CSV files with frame offsets per video.  
-- May suffer from drift and requires careful setup (e.g., GPS off or synced).
+- May suffer from drift and requires careful setup (e.g., GPS off or GPS_SYNC=0).
 
 ## 1.3. Classification
 
