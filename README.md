@@ -8,7 +8,7 @@ Go2Rep is a GUI for multi-GoPro HERO (tested on GoPro 11/13) video collection an
 
 ## Installation via Anaconda
 
-1. Click on the installation link to download the anaconda environment : ([Link1](https://drive.google.com/file/d/1sXM7SYr03VyQOskW2x5Of3cj5IBftGFn/view?usp=sharing))
+1. Click on the link to download the anaconda environment : ([Link1](https://drive.google.com/file/d/1sXM7SYr03VyQOskW2x5Of3cj5IBftGFn/view?usp=sharing))
 
 2. Add Go2Rep to your Anaconda environment:
    - Navigate to:  
