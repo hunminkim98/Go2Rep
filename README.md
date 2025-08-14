@@ -112,8 +112,11 @@ This configures environment variables so `cl.exe` can be found.
      ```bash
      python main_gui.py
      ```
+# Prerequisites
+This GUI has several system requirements, which are outlined in the following post:
+(https://github.com/ShabahangShayegan/Go2Rep/wiki#prerequisites) 
 # 1. Features
-
+Here, we present the general functionality of the GUI. For more details about each function, please refer to the Wiki page.
 ## 1.0 Visual flow chart of Go2Rep
 
 <img src="Assets/Image8.png" alt="Go2Rep GUI" width="300"> 
