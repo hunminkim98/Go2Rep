@@ -1,0 +1,53 @@
+name: Go2Rep
+channels: 
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - numpy
+  - pandas
+  - scipy
+  - matplotlib
+  - opencv
+  - ffmpeg
+  - pip:
+      # UI Layer
+      - PySide6
+      - PySide6-Addons
+      - qasync
+      
+      # Core Backend
+      - aiohttp
+      - bleak
+      
+      # Video Processing
+      - av
+      - imageio[ffmpeg]
+      - moviepy
+      
+      # 3D Analysis
+      - rtmlib
+      - onnxruntime
+      - filterpy
+      - c3d
+      
+      # Utilities
+      - toml
+      - pyyaml
+      - tqdm
+      - loguru
+      - python-dateutil
+      
+      # Testing
+      - pytest
+      - pytest-qt
+      - pytest-asyncio
+      - pytest-cov
+      - pytest-mock
+      
+      # Development
+      - black
+      - ruff
+      - mypy
+      - pre-commit

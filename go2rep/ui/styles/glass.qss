@@ -1,0 +1,435 @@
+/* PerforMetrics v2.0 - Dark Violet Theme */
+
+/* ========== Base Styles ========== */
+QMainWindow {
+    background-color: rgba(15, 15, 15, 1); /* BACKGROUND_DARK - 더 어두운 회색 */
+    color: rgba(226, 232, 240, 1); /* TEXT_PRIMARY */
+}
+
+QWidget {
+    background-color: transparent;
+    color: rgba(226, 232, 240, 1);
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+
+/* ========== Glassmorphism Cards ========== */
+.GlassCard {
+    background-color: rgba(21, 21, 21, 0.9); /* SURFACE - 더 밝은 검정색 */
+    border: 1px solid rgba(255, 255, 255, 0.06); /* BORDER */
+    border-radius: 14px;
+    padding: 20px;
+}
+
+.GlassCard:hover {
+    background-color: rgba(21, 21, 21, 1.0);
+    border-color: rgba(124, 58, 237, 0.2); /* ACCENT with transparency */
+}
+
+/* ========== Neumorphism Cards ========== */
+.NeuroCard {
+    background-color: rgba(21, 21, 21, 0.9); /* SURFACE - 더 밝은 검정색 */
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ========== Sidebar ========== */
+#Sidebar {
+    background-color: rgba(21, 21, 21, 0.95); /* SURFACE - 더 밝은 검정색 */
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    min-width: 240px;
+    max-width: 240px;
+}
+
+#Sidebar QLabel {
+    color: rgba(226, 232, 240, 1); /* TEXT_PRIMARY */
+    font-size: 24px;
+    font-weight: bold;
+    padding: 16px;
+}
+
+/* Navigation Buttons */
+#NavButton {
+    background-color: transparent;
+    border: none;
+    border-radius: 10px;
+    color: rgba(148, 163, 184, 1); /* TEXT_SECONDARY */
+    font-size: 14px;
+    font-weight: 500;
+    padding: 12px 16px;
+    margin: 4px 0;
+    text-align: left;
+}
+
+#NavButton:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+    color: rgba(226, 232, 240, 1); /* TEXT_PRIMARY */
+}
+
+#NavButton:checked {
+    background-color: rgba(124, 58, 237, 0.10); /* ACCENT with transparency */
+    color: rgba(124, 58, 237, 1); /* ACCENT */
+    border-left: 3px solid rgba(124, 58, 237, 1); /* ACCENT accent bar */
+}
+
+/* ========== Buttons ========== */
+NeuroButton[class="primary"] {
+    background-color: rgba(45, 45, 45, 0.9); /* Modern dark gray */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: rgba(226, 232, 240, 1); /* TEXT_PRIMARY */
+    font-weight: 500;
+    padding: 12px 24px;
+    min-height: 20px;
+}
+
+NeuroButton[class="primary"]:hover {
+    background-color: rgba(55, 55, 55, 1); /* Slightly lighter on hover */
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+NeuroButton[class="primary"]:pressed {
+    background-color: rgba(35, 35, 35, 1); /* Darker when pressed */
+}
+
+NeuroButton[class="secondary"] {
+    background-color: rgba(35, 35, 35, 0.6); /* Subtle background */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    color: rgba(148, 163, 184, 1); /* TEXT_SECONDARY */
+    font-weight: 400;
+    padding: 12px 24px;
+    min-height: 20px;
+}
+
+NeuroButton[class="secondary"]:hover {
+    background-color: rgba(45, 45, 45, 0.8);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: rgba(226, 232, 240, 1); /* TEXT_PRIMARY */
+}
+
+NeuroButton[class="danger"] {
+    background-color: rgba(45, 35, 35, 0.9); /* Dark red tint */
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    border-radius: 10px;
+    color: rgba(239, 68, 68, 1); /* ERROR text */
+    font-weight: 500;
+    padding: 12px 24px;
+    min-height: 20px;
+}
+
+NeuroButton[class="danger"]:hover {
+    background-color: rgba(55, 35, 35, 1);
+    border-color: rgba(239, 68, 68, 0.5);
+    color: rgba(248, 113, 113, 1); /* Lighter red */
+}
+
+NeuroButton[class="success"] {
+    background-color: rgba(35, 45, 35, 0.9); /* Dark green tint */
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    border-radius: 10px;
+    color: rgba(34, 197, 94, 1); /* SUCCESS text */
+    font-weight: 500;
+    padding: 12px 24px;
+    min-height: 20px;
+}
+
+NeuroButton[class="success"]:hover {
+    background-color: rgba(35, 55, 35, 1);
+    border-color: rgba(34, 197, 94, 0.5);
+    color: rgba(74, 222, 128, 1); /* Lighter green */
+}
+
+/* ========== Input Fields ========== */
+QLineEdit, QTextEdit, QComboBox, QSpinBox {
+    background-color: rgba(30, 34, 46, 0.9); /* SURFACE_ALT with transparency */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    color: rgba(226, 232, 240, 1); /* TEXT_PRIMARY */
+    padding: 12px 16px;
+    font-size: 14px;
+}
+
+QLineEdit:focus, QTextEdit:focus, QComboBox:focus, QSpinBox:focus {
+    border: 2px solid rgba(124, 58, 237, 0.35); /* ACCENT focus ring */
+    outline: none;
+}
+
+QLineEdit::placeholder, QTextEdit::placeholder {
+    color: rgba(148, 163, 184, 0.6); /* TEXT_SECONDARY with transparency */
+}
+
+/* ========== Tables ========== */
+QTableView {
+    background-color: rgba(24, 27, 38, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    gridline-color: rgba(255, 255, 255, 0.05);
+    selection-background-color: rgba(124, 58, 237, 0.2);
+    alternate-background-color: rgba(255, 255, 255, 0.02);
+}
+
+QHeaderView::section {
+    background-color: rgba(31, 35, 48, 0.8);
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(148, 163, 184, 1); /* TEXT_SECONDARY */
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 12px 16px;
+    text-transform: uppercase;
+}
+
+QTableView::item {
+    padding: 8px 16px;
+    border: none;
+}
+
+QTableView::item:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+QTableView::item:selected {
+    background-color: rgba(124, 58, 237, 0.15);
+}
+
+/* ========== Progress Bars ========== */
+QProgressBar {
+    background-color: rgba(31, 35, 48, 0.6);
+    border: none;
+    border-radius: 8px;
+    height: 8px;
+    text-align: center;
+}
+
+QProgressBar::chunk {
+    background-color: rgba(124, 58, 237, 1); /* ACCENT */
+    border-radius: 8px;
+}
+
+/* ========== Scrollbars ========== */
+QScrollBar:vertical {
+    background-color: rgba(24, 27, 38, 0.3);
+    border: none;
+    border-radius: 6px;
+    width: 12px;
+}
+
+QScrollBar::handle:vertical {
+    background-color: rgba(148, 163, 184, 0.4);
+    border-radius: 6px;
+    min-height: 20px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: rgba(148, 163, 184, 0.6);
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    border: none;
+    background: none;
+}
+
+QScrollBar:horizontal {
+    background-color: rgba(24, 27, 38, 0.3);
+    border: none;
+    border-radius: 6px;
+    height: 12px;
+}
+
+QScrollBar::handle:horizontal {
+    background-color: rgba(148, 163, 184, 0.4);
+    border-radius: 6px;
+    min-width: 20px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background-color: rgba(148, 163, 184, 0.6);
+}
+
+QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+    border: none;
+    background: none;
+}
+
+/* ========== Group Boxes ========== */
+QGroupBox {
+    background-color: rgba(24, 27, 38, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    color: rgba(226, 232, 240, 1); /* TEXT_PRIMARY */
+    font-weight: 600;
+    margin-top: 12px;
+    padding-top: 12px;
+}
+
+QGroupBox::title {
+    color: rgba(226, 232, 240, 1); /* TEXT_PRIMARY */
+    font-size: 14px;
+    font-weight: 600;
+    left: 16px;
+    padding: 0 8px;
+    subcontrol-origin: margin;
+}
+
+/* ========== Tab Widget ========== */
+QTabWidget::pane {
+    background-color: rgba(24, 27, 38, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+}
+
+QTabBar::tab {
+    background-color: rgba(31, 35, 48, 0.6);
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: rgba(148, 163, 184, 1); /* TEXT_SECONDARY */
+    font-weight: 500;
+    padding: 12px 24px;
+}
+
+QTabBar::tab:selected {
+    background-color: rgba(24, 27, 38, 0.8);
+    border-bottom-color: rgba(226, 232, 240, 1); /* TEXT_PRIMARY */
+    color: rgba(226, 232, 240, 1); /* TEXT_PRIMARY */
+}
+
+QTabBar::tab:hover {
+    background-color: rgba(31, 35, 48, 0.8);
+    color: rgba(226, 232, 240, 1); /* TEXT_PRIMARY */
+}
+
+/* ========== List Widgets ========== */
+QListWidget {
+    background-color: rgba(24, 27, 38, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    color: rgba(226, 232, 240, 1); /* TEXT_PRIMARY */
+    outline: none;
+}
+
+QListWidget::item {
+    background-color: transparent;
+    border: none;
+    padding: 8px 16px;
+}
+
+QListWidget::item:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+QListWidget::item:selected {
+    background-color: rgba(226, 232, 240, 0.15);
+    color: rgba(226, 232, 240, 1); /* TEXT_PRIMARY */
+}
+
+/* ========== Tree Widgets ========== */
+QTreeWidget {
+    background-color: rgba(24, 27, 38, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    color: rgba(226, 232, 240, 1); /* TEXT_PRIMARY */
+    outline: none;
+}
+
+QTreeWidget::item {
+    background-color: transparent;
+    border: none;
+    padding: 4px 8px;
+}
+
+QTreeWidget::item:hover {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+QTreeWidget::item:selected {
+    background-color: rgba(226, 232, 240, 0.15);
+    color: rgba(226, 232, 240, 1); /* TEXT_PRIMARY */
+}
+
+/* ========== Scroll Areas ========== */
+QScrollArea {
+    border: none;
+    background-color: transparent;
+}
+
+QScrollArea > QWidget > QWidget {
+    background-color: transparent;
+}
+
+/* ========== Tooltips ========== */
+QToolTip {
+    background-color: rgba(12, 14, 20, 0.95);
+    border: 1px solid rgba(226, 232, 240, 0.3);
+    border-radius: 8px;
+    color: rgba(226, 232, 240, 1); /* TEXT_PRIMARY */
+    font-size: 12px;
+    padding: 8px 12px;
+}
+
+/* ========== Sliders ========== */
+QSlider::groove:horizontal {
+    background-color: rgba(31, 35, 48, 0.6);
+    border-radius: 4px;
+    height: 8px;
+}
+
+QSlider::handle:horizontal {
+    background-color: rgba(226, 232, 240, 1); /* TEXT_PRIMARY */
+    border: none;
+    border-radius: 6px;
+    height: 16px;
+    margin: -4px 0;
+    width: 16px;
+}
+
+QSlider::handle:horizontal:hover {
+    background-color: rgba(148, 163, 184, 1); /* TEXT_SECONDARY */
+}
+
+/* ========== Checkboxes ========== */
+QCheckBox {
+    color: rgba(226, 232, 240, 1); /* TEXT_PRIMARY */
+    spacing: 8px;
+}
+
+QCheckBox::indicator {
+    background-color: rgba(31, 35, 48, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 4px;
+    height: 16px;
+    width: 16px;
+}
+
+QCheckBox::indicator:checked {
+    background-color: rgba(226, 232, 240, 1); /* TEXT_PRIMARY */
+    border-color: rgba(226, 232, 240, 1);
+}
+
+QCheckBox::indicator:checked:hover {
+    background-color: rgba(148, 163, 184, 1); /* TEXT_SECONDARY */
+}
+
+/* ========== Radio Buttons ========== */
+QRadioButton {
+    color: rgba(226, 232, 240, 1); /* TEXT_PRIMARY */
+    spacing: 8px;
+}
+
+QRadioButton::indicator {
+    background-color: rgba(31, 35, 48, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    height: 16px;
+    width: 16px;
+}
+
+QRadioButton::indicator:checked {
+    background-color: rgba(226, 232, 240, 1); /* TEXT_PRIMARY */
+    border-color: rgba(226, 232, 240, 1);
+}
+
+QRadioButton::indicator:checked:hover {
+    background-color: rgba(148, 163, 184, 1); /* TEXT_SECONDARY */
+}

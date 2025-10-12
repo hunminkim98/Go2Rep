@@ -1,0 +1,76 @@
+# Go2Rep v2.0 Requirements
+# Core dependencies for the refactored Go2Rep application
+
+# ============ UI Layer ============
+PySide6                    # Qt6 for Python (Official, LGPL)
+PySide6-Addons            # Additional Qt modules
+qasync                     # asyncio + Qt event loop integration
+
+# ============ Core Backend ============
+asyncio-mqtt              # Async patterns
+aiohttp                   # Async HTTP (GP13 COHN)
+bleak                     # BLE (GP11)
+
+# ============ Video Processing ============
+opencv-python             # Image/video processing
+av                        # PyAV (FFmpeg Python binding)
+imageio[ffmpeg]           # Video I/O
+moviepy                   # Video editing (legacy support)
+
+# ============ Scientific Computing ============
+numpy
+pandas
+scipy
+matplotlib                # Plotting and visualization
+
+# ============ 3D Analysis (Pose2Sim Integration) ============
+rtmlib                    # RTMPose without mmpose
+onnxruntime               # ONNX runtime (RTMPose) - CPU version
+filterpy                  # Kalman filtering
+c3d                       # C3D file format
+
+# ============ Calibration ============
+# (Pose2Sim 내부 의존성)
+
+# ============ Utilities ============
+toml                      # Config files
+pyyaml
+tqdm                      # Progress bars
+loguru                    # Better logging
+python-dateutil           # Date parsing
+
+# ============ Testing ============
+pytest
+pytest-qt                 # Qt testing
+pytest-asyncio
+pytest-cov
+pytest-mock               # Mocking utilities
+
+# ============ Development ============
+black                     # Code formatting
+ruff                      # Linting
+mypy                      # Type checking
+pre-commit                # Git hooks
+
+# ============ Optional Dependencies ============
+# Uncomment as needed for specific features
+
+# For GPU acceleration (CUDA)
+# cupy-cuda12x            # CUDA 12.x support
+# cupy-cuda11x            # CUDA 11.x support
+
+# For advanced video processing
+# ffmpeg-python           # FFmpeg Python wrapper
+# imageio-ffmpeg          # FFmpeg plugin for imageio
+
+# For cloud storage (future)
+# boto3                   # AWS S3
+# google-cloud-storage    # Google Cloud Storage
+
+# For web API (future)
+# fastapi                 # Web API framework
+# uvicorn                 # ASGI server
+
+# For documentation
+# sphinx                  # Documentation generator
+# sphinx-rtd-theme        # Read the Docs theme

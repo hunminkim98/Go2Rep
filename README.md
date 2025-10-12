@@ -1,10 +1,61 @@
-# Go2Rep
-Go2Rep is a GUI for multi-GoPro HERO (tested on GoPro 11/13) video collection and processing (COHN or BLE+AP). It supports camera control, video sync, Theia classification, calibration, and report generation—built for markerless 3D motion capture using wireless GoPro workflows.
+# PerforMetrics v2.0
+PerforMetrics is a modern PySide6-based GUI for multi-GoPro HERO (tested on GoPro 11/13) video collection and processing (COHN or BLE+AP). It supports camera control, video sync, Theia classification, calibration, and report generation—built for markerless 3D motion capture using wireless GoPro workflows.
 
-<img src="Assets/Image1.png" alt="Go2Rep GUI" width="1000">
+## Architecture
+- **MVVM Pattern**: Clear separation between View, ViewModel, and Model layers
+- **Dependency Injection**: Mock/Real adapter toggle for development and production
+- **Async/Await**: Non-blocking UI with qasync integration
+- **Modern UI**: Glassmorphism + Neumorphism design with smooth scrolling
+
+<img src="Assets/Image1.png" alt="PerforMetrics GUI" width="1000">
 
 
-# 0. Installation
+# Quick Start (v2.0)
+
+## Running PerforMetrics v2.0
+
+### Prerequisites
+- Python 3.11+
+- Conda environment with dependencies (see `environment.yml`)
+
+### Setup Environment
+```bash
+# Create conda environment
+conda env create -f environment.yml
+
+# Activate environment
+conda activate Go2Rep
+
+# Install additional dependencies
+pip install -r requirements.txt
+```
+
+### Launch Application
+```bash
+# Run from project root
+python go2rep/main.py
+```
+
+### Mock Mode (Default)
+The application runs in Mock mode by default, simulating camera operations without hardware:
+- **Scan**: Returns 3 mock GoPro cameras
+- **Connect**: Simulates connection with 2-second delay
+- **Disconnect**: Simulates disconnection with 0.5-second delay
+- **Error Rate**: 10% random failure rate for testing
+
+### Switching to Real Mode
+To use actual hardware, modify `go2rep/main.py`:
+```python
+# Change this line:
+container = Container(use_mock=True)
+# To:
+container = Container(use_mock=False)
+```
+
+### Testing
+See `AGENTS.md` for detailed smoke test procedures.
+
+# Installation (Legacy v1.0)
 
 ## Installation via Anaconda
 
