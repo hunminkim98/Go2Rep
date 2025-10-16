@@ -1,5 +1,3 @@
-# PerforMetrics v2.0
-PerforMetrics is a modern PySide6-based GUI for multi-GoPro HERO (tested on GoPro 11/13) video collection and processing (COHN or BLE+AP). It supports camera control, video sync, Theia classification, calibration, and report generation—built for markerless 3D motion capture using wireless GoPro workflows.
 
 ## Architecture
 - **MVVM Pattern**: Clear separation between View, ViewModel, and Model layers
