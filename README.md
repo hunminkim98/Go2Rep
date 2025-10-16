@@ -10,7 +10,7 @@
 
 # Quick Start (v2.0)
 
-## Running PerforMetrics v2.0
+## Running
 
 ### Prerequisites
 - Python 3.11+
