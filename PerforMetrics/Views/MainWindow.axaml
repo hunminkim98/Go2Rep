@@ -1,0 +1,20 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:PerforMetrics.ViewModels"
+        xmlns:views="using:PerforMetrics.Views"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
+        x:Class="PerforMetrics.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="PerforMetrics"
+        Width="1200"
+        Height="800"
+        Background="Transparent"
+        TransparencyBackgroundFallback="#0B1325"
+        TransparencyLevelHint="AcrylicBlur,Blur"
+        WindowStartupLocation="CenterScreen">
+
+    <views:LandingPage />
+
+</Window>

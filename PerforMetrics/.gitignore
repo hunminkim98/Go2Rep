@@ -1,0 +1,48 @@
+# C# / .NET
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.dll
+*.exe
+*.pdb
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Backend specific
+Backend/venv/
+Backend/env/
+Backend/*.log
+Backend/.env
+Backend/__pycache__/
+Backend/routers/__pycache__/
+
+# Application specific
+*.tmp
+*.temp
+

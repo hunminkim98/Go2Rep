@@ -1,0 +1,277 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:PerforMetrics.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
+             x:Class="PerforMetrics.Views.LandingPage"
+             x:DataType="vm:LandingPageViewModel">
+
+  <Design.DataContext>
+    <vm:LandingPageViewModel />
+  </Design.DataContext>
+
+  <UserControl.Resources>
+    <LinearGradientBrush x:Key="LandingBackgroundGradient" StartPoint="0,0" EndPoint="1,1">
+      <GradientStop Offset="0" Color="#FF0B1325" />
+      <GradientStop Offset="0.45" Color="#FF14233B" />
+      <GradientStop Offset="1" Color="#FF060B17" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="GlassSurfaceBrush" StartPoint="0,0" EndPoint="1,1">
+      <GradientStop Offset="0" Color="#80FFFFFF" />
+      <GradientStop Offset="1" Color="#19FFFFFF" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="FeatureCardBrush" StartPoint="0,0" EndPoint="1,1">
+      <GradientStop Offset="0" Color="#F8FFFFFF" />
+      <GradientStop Offset="1" Color="#D5E8FFFF" />
+    </LinearGradientBrush>
+  </UserControl.Resources>
+
+  <UserControl.Styles>
+    <Style Selector="Button.feature-card">
+      <Setter Property="Margin" Value="16" />
+      <Setter Property="Padding" Value="36" />
+      <Setter Property="Width" Value="280" />
+      <Setter Property="Height" Value="260" />
+      <Setter Property="Background" Value="{StaticResource FeatureCardBrush}" />
+      <Setter Property="BorderBrush" Value="#4CFFFFFF" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+      <Setter Property="VerticalContentAlignment" Value="Stretch" />
+      <Setter Property="Foreground" Value="#162840" />
+      <Setter Property="Cursor" Value="Hand" />
+      <Setter Property="Template">
+        <ControlTemplate TargetType="Button">
+          <Border x:Name="CardBorder"
+                  Background="{TemplateBinding Background}"
+                  BorderBrush="{TemplateBinding BorderBrush}"
+                  BorderThickness="{TemplateBinding BorderThickness}"
+                  CornerRadius="28"
+                  BoxShadow="8 8 20 0 #150E1C33, -6 -6 20 0 #32FFFFFF">
+            <ContentPresenter Content="{TemplateBinding Content}"
+                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+          </Border>
+        </ControlTemplate>
+      </Setter>
+    </Style>
+
+    <Style Selector="Button.feature-card:pointerover /template/ Border#CardBorder">
+      <Setter Property="BoxShadow" Value="12 12 28 0 #200E1C33, -8 -8 24 0 #40FFFFFF" />
+      <Setter Property="Background" Value="#F0FFFFFF" />
+    </Style>
+
+    <Style Selector="Button.feature-card:pressed /template/ Border#CardBorder">
+      <Setter Property="BoxShadow" Value="6 6 16 0 #220E1C33, -4 -4 16 0 #4CFFFFFF" />
+      <Setter Property="Background" Value="#E8F4FF" />
+    </Style>
+
+    <Style Selector="Button.feature-card > StackPanel">
+      <Setter Property="HorizontalAlignment" Value="Center" />
+      <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+  </UserControl.Styles>
+
+  <UserControl.Background>
+    <StaticResource ResourceKey="LandingBackgroundGradient" />
+  </UserControl.Background>
+
+  <Grid>
+    <Border Margin="48"
+            Padding="48"
+            CornerRadius="36"
+            Background="{StaticResource GlassSurfaceBrush}"
+            BorderBrush="#66FFFFFF"
+            BorderThickness="1"
+            BoxShadow="0 40 80 0 #22060E24">
+      <Grid RowDefinitions="Auto,*,Auto" RowSpacing="32">
+
+        <!-- Header -->
+        <Border Grid.Row="0"
+                Padding="24,28"
+                CornerRadius="28"
+                Background="#33FFFFFF"
+                BorderBrush="#40FFFFFF"
+                BorderThickness="1"
+                BoxShadow="0 20 40 0 #1A101E33">
+          <StackPanel HorizontalAlignment="Center" Spacing="8">
+            <TextBlock Text="PerforMetrics"
+                       FontSize="52"
+                       FontWeight="Bold"
+                       Foreground="#F5F9FF"
+                       HorizontalAlignment="Center" />
+            <TextBlock Text="Multi-Camera GoPro Control and Motion Analysis Platform"
+                       FontSize="18"
+                       Foreground="#D0E4FF"
+                       HorizontalAlignment="Center"
+                       TextWrapping="Wrap" />
+          </StackPanel>
+        </Border>
+
+        <!-- Main Content - Feature Cards Grid -->
+        <ScrollViewer Grid.Row="1"
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto">
+          <Border Padding="12">
+            <StackPanel Margin="0" MaxWidth="1400" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="12">
+
+            <!-- First Row -->
+            <Grid ColumnDefinitions="Auto,Auto,Auto" HorizontalAlignment="Center" ColumnSpacing="24">
+
+              <!-- GoPro Control Card -->
+              <Button Grid.Column="0" Classes="feature-card"
+                      Command="{Binding NavigateToGoProControlCommand}">
+                <StackPanel Spacing="18">
+                  <TextBlock Text="GoPro Control"
+                             FontSize="24"
+                             FontWeight="SemiBold"
+                             Foreground="#162840"
+                             HorizontalAlignment="Center"
+                             TextAlignment="Center" />
+                  <TextBlock Text="BLE/WiFi/COHN camera control, recording, and media download"
+                             FontSize="14"
+                             Foreground="#4E607A"
+                             TextWrapping="Wrap"
+                             TextAlignment="Center" />
+                </StackPanel>
+              </Button>
+
+              <!-- Synchronization Card -->
+              <Button Grid.Column="1" Classes="feature-card"
+                      Command="{Binding NavigateToSynchronizationCommand}">
+                <StackPanel Spacing="18">
+                  <TextBlock Text="Synchronization"
+                             FontSize="24"
+                             FontWeight="SemiBold"
+                             Foreground="#162840"
+                             HorizontalAlignment="Center"
+                             TextAlignment="Center" />
+                  <TextBlock Text="Manual and timecode-based video synchronization"
+                             FontSize="14"
+                             Foreground="#4E607A"
+                             TextWrapping="Wrap"
+                             TextAlignment="Center" />
+                </StackPanel>
+              </Button>
+
+              <!-- Classification Card -->
+              <Button Grid.Column="2" Classes="feature-card"
+                      Command="{Binding NavigateToClassificationCommand}">
+                <StackPanel Spacing="18">
+                  <TextBlock Text="Classification"
+                             FontSize="24"
+                             FontWeight="SemiBold"
+                             Foreground="#162840"
+                             HorizontalAlignment="Center"
+                             TextAlignment="Center" />
+                  <TextBlock Text="Theia-compatible video classification and processing"
+                             FontSize="14"
+                             Foreground="#4E607A"
+                             TextWrapping="Wrap"
+                             TextAlignment="Center" />
+                </StackPanel>
+              </Button>
+            </Grid>
+
+            <!-- Second Row -->
+            <Grid ColumnDefinitions="Auto,Auto,Auto" HorizontalAlignment="Center" ColumnSpacing="24">
+
+              <!-- Calibration Card -->
+              <Button Grid.Column="0" Classes="feature-card"
+                      Command="{Binding NavigateToCalibrationCommand}">
+                <StackPanel Spacing="18">
+                  <TextBlock Text="Calibration"
+                             FontSize="24"
+                             FontWeight="SemiBold"
+                             Foreground="#162840"
+                             HorizontalAlignment="Center"
+                             TextAlignment="Center" />
+                  <TextBlock Text="Intrinsic and extrinsic camera calibration"
+                             FontSize="14"
+                             Foreground="#4E607A"
+                             TextWrapping="Wrap"
+                             TextAlignment="Center" />
+                </StackPanel>
+              </Button>
+
+              <!-- Motion Analysis Card -->
+              <Button Grid.Column="1" Classes="feature-card"
+                      Command="{Binding NavigateToMotionAnalysisCommand}">
+                <StackPanel Spacing="18">
+                  <TextBlock Text="Motion Analysis"
+                             FontSize="24"
+                             FontWeight="SemiBold"
+                             Foreground="#162840"
+                             HorizontalAlignment="Center"
+                             TextAlignment="Center" />
+                  <TextBlock Text="Markerless 3D motion capture and pose estimation"
+                             FontSize="14"
+                             Foreground="#4E607A"
+                             TextWrapping="Wrap"
+                             TextAlignment="Center" />
+                </StackPanel>
+              </Button>
+
+              <!-- Report Generator Card -->
+              <Button Grid.Column="2" Classes="feature-card"
+                      Command="{Binding NavigateToReportGeneratorCommand}">
+                <StackPanel Spacing="18">
+                  <TextBlock Text="Report Generator"
+                             FontSize="24"
+                             FontWeight="SemiBold"
+                             Foreground="#162840"
+                             HorizontalAlignment="Center"
+                             TextAlignment="Center" />
+                  <TextBlock Text="Biomechanical metrics extraction and visualization"
+                             FontSize="14"
+                             Foreground="#4E607A"
+                             TextWrapping="Wrap"
+                             TextAlignment="Center" />
+                </StackPanel>
+              </Button>
+            </Grid>
+
+          </StackPanel>
+          </Border>
+        </ScrollViewer>
+
+        <!-- Status Bar -->
+        <Border Grid.Row="2"
+                Padding="20,16"
+                CornerRadius="24"
+                Background="#28FFFFFF"
+                BorderBrush="#33FFFFFF"
+                BorderThickness="1"
+                BoxShadow="0 18 36 0 #140E1C33">
+          <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+            <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="18">
+              <TextBlock Text="Backend Status:"
+                         Foreground="#EEF6FF"
+                         VerticalAlignment="Center"
+                         FontSize="14" />
+              <Ellipse Width="14" Height="14" VerticalAlignment="Center">
+                <Ellipse.Fill>
+                  <SolidColorBrush Color="{Binding IsBackendConnected, Converter={StaticResource StatusColorConverter}}" />
+                </Ellipse.Fill>
+              </Ellipse>
+              <TextBlock Text="{Binding BackendStatus}"
+                         Foreground="{Binding IsBackendConnected, Converter={StaticResource StatusTextColorConverter}}"
+                         VerticalAlignment="Center"
+                         FontSize="14" />
+            </StackPanel>
+            <TextBlock Grid.Column="1"
+                       Text="{Binding VersionInfo}"
+                       Foreground="#CDE3FF"
+                       VerticalAlignment="Center"
+                       FontSize="14" />
+          </Grid>
+        </Border>
+
+      </Grid>
+    </Border>
+  </Grid>
+
+</UserControl>

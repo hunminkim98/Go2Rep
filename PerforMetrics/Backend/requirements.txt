@@ -1,0 +1,25 @@
+# FastAPI Backend Dependencies for PerforMetrics
+
+# FastAPI Framework
+fastapi==0.115.0
+uvicorn[standard]==0.30.0
+pydantic==2.9.0
+pydantic-settings==2.5.0
+
+# CORS & Security
+python-multipart==0.0.9
+
+# Async support
+asyncio==3.4.3
+
+# Existing Go2Rep Dependencies
+bleak==1.0.1
+protobuf==3.20.3
+nest-asyncio==1.6.0
+requests==2.32.4
+beautifulsoup4==4.13.4
+keyboard==0.13.5
+rich==14.0.0
+pytz==2025.2
+tzlocal==5.3.1
+
