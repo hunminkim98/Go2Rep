@@ -1,0 +1,22 @@
+{
+    "20250324_094908": {
+        "reference_video": "C:\\videos\\DCIM\\1\\20250324_094910-CAMERA10-GX010604.MP4",
+        "start_frame_on_reference_video": 7,
+        "end_frame_on_reference_video": 34,
+        "offsets": {
+            "C:\\videos\\DCIM\\1\\20250324_094908-CAMERA06-GX011345.MP4": 1,
+            "C:\\videos\\DCIM\\1\\20250324_094909-CAMERA04-GX011233.MP4": 0,
+            "C:\\videos\\DCIM\\1\\20250324_094910-CAMERA10-GX010604.MP4": 2
+        }
+    },
+    "20250324_095609": {
+        "reference_video": "C:\\videos\\DCIM\\1\\20250324_095610-CAMERA10-GX010604.MP4",
+        "start_frame_on_reference_video": 1,
+        "end_frame_on_reference_video": 30,
+        "offsets": {
+            "C:\\videos\\DCIM\\1\\20250324_095609-CAMERA04-GX011233.MP4": -3,
+            "C:\\videos\\DCIM\\1\\20250324_095609-CAMERA06-GX011345.MP4": 6,
+            "C:\\videos\\DCIM\\1\\20250324_095610-CAMERA10-GX010604.MP4": -6
+        }
+    }
+}

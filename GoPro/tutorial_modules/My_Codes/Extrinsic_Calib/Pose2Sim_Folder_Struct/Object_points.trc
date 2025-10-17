@@ -1,0 +1,7 @@
+PathFileType	4	(X/Y/Z)	Object_points.trc
+DataRate	CameraRate	NumFrames	NumMarkers	Units	OrigDataRate	OrigDataStartFrame	OrigNumFrames
+1	1	2	2	m	1	2
+Frame#	Time	0			1		
+		X1	Y1	Z1	X2	Y2	Z2
+1	1.0	0.0	0.0325	-1.23	0.0	0.5325	0.0
+2	2.0	0.0	0.0325	-1.23	0.0	0.5325	0.0

@@ -1,0 +1,28 @@
+# GoPro Control Dependencies
+# Install with: pip install -r requirements.txt
+# Versions from Go2Rep_ORIGINAL environment
+
+# BLE communication
+bleak==1.0.1
+
+# Protobuf (required for tutorial_modules)
+protobuf==3.20.3
+
+# Async event loop support
+nest-asyncio==1.6.0
+
+# HTTP requests
+requests==2.32.4
+
+# HTML parsing (for WiFi AP media list)
+beautifulsoup4==4.13.4
+
+# Keyboard input capture
+keyboard==0.13.5
+
+# Rich console output
+rich==14.0.0
+
+# Timezone support (for COHN)
+pytz==2025.2
+tzlocal==5.3.1
