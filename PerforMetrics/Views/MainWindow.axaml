@@ -4,17 +4,21 @@
         xmlns:views="using:PerforMetrics.Views"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
+        mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="400"
         x:Class="PerforMetrics.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/performetrics-logo.png"
         Title="PerforMetrics"
-        Width="1200"
-        Height="800"
-        Background="Transparent"
-        TransparencyBackgroundFallback="#0B1325"
-        TransparencyLevelHint="AcrylicBlur,Blur"
-        WindowStartupLocation="CenterScreen">
+        Width="{Binding WindowWidth}"
+        Height="{Binding WindowHeight}"
+        Background="#E5E7EB"
+        WindowStartupLocation="CenterScreen"
+        CanResize="False">
 
-    <views:LandingPage />
+    <TransitioningContentControl Content="{Binding CurrentView}">
+        <TransitioningContentControl.PageTransition>
+            <CrossFade Duration="0:00:00.600" />
+        </TransitioningContentControl.PageTransition>
+    </TransitioningContentControl>
 
 </Window>

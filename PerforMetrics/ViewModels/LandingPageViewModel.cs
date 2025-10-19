@@ -1,4 +1,5 @@
 using System;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Timers;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -24,9 +25,29 @@ public partial class LandingPageViewModel : ViewModelBase
     [ObservableProperty]
     private string _versionInfo = "v1.0.0";
 
+    [ObservableProperty]
+    private bool _isSidebarVisible = true;
+
+    [ObservableProperty]
+    private string _selectedMenuItem = "";
+
+    [ObservableProperty]
+    private string _selectedProject = "No options available";
+
+    [ObservableProperty]
+    private string _mainContentMessage = "DepthAI connected, awaiting device...";
+
+    public ObservableCollection<string> ProjectOptions { get; }
+
     public LandingPageViewModel()
     {
         _apiService = new ApiService();
+        
+        // Initialize project options
+        ProjectOptions = new ObservableCollection<string>
+        {
+            "No options available"
+        };
         
         // Setup periodic health check
         _healthCheckTimer = new Timer(5000); // Check every 5 seconds
@@ -45,13 +66,26 @@ public partial class LandingPageViewModel : ViewModelBase
         try
         {
             IsBackendConnected = await _apiService.CheckBackendHealthAsync();
-            BackendStatus = IsBackendConnected ? "Connected" : "Disconnected";
+            BackendStatus = IsBackendConnected ? "Backend Connected" : "Backend Disconnected";
+            MainContentMessage = IsBackendConnected 
+                ? "Backend connected, awaiting device..." 
+                : "Backend disconnected. Please start the backend service.";
         }
         catch
         {
             IsBackendConnected = false;
-            BackendStatus = "Disconnected";
+            BackendStatus = "Backend Disconnected";
+            MainContentMessage = "Backend disconnected. Please start the backend service.";
         }
+    }
+
+    /// <summary>
+    /// Toggle sidebar visibility
+    /// </summary>
+    [RelayCommand]
+    private void ToggleSidebar()
+    {
+        IsSidebarVisible = !IsSidebarVisible;
     }
 
     /// <summary>
@@ -60,6 +94,7 @@ public partial class LandingPageViewModel : ViewModelBase
     [RelayCommand]
     private void NavigateToGoProControl()
     {
+        SelectedMenuItem = "GoProControl";
         // TODO: Implement navigation to GoPro Control page
         Console.WriteLine("Navigate to GoPro Control");
     }
@@ -70,6 +105,7 @@ public partial class LandingPageViewModel : ViewModelBase
     [RelayCommand]
     private void NavigateToSynchronization()
     {
+        SelectedMenuItem = "Synchronization";
         // TODO: Implement navigation to Synchronization page
         Console.WriteLine("Navigate to Synchronization");
     }
@@ -80,6 +116,7 @@ public partial class LandingPageViewModel : ViewModelBase
     [RelayCommand]
     private void NavigateToClassification()
     {
+        SelectedMenuItem = "Classification";
         // TODO: Implement navigation to Classification page
         Console.WriteLine("Navigate to Classification");
     }
@@ -90,6 +127,7 @@ public partial class LandingPageViewModel : ViewModelBase
     [RelayCommand]
     private void NavigateToCalibration()
     {
+        SelectedMenuItem = "Calibration";
         // TODO: Implement navigation to Calibration page
         Console.WriteLine("Navigate to Calibration");
     }
@@ -100,6 +138,7 @@ public partial class LandingPageViewModel : ViewModelBase
     [RelayCommand]
     private void NavigateToMotionAnalysis()
     {
+        SelectedMenuItem = "MotionAnalysis";
         // TODO: Implement navigation to Motion Analysis page
         Console.WriteLine("Navigate to Motion Analysis");
     }
@@ -110,6 +149,7 @@ public partial class LandingPageViewModel : ViewModelBase
     [RelayCommand]
     private void NavigateToReportGenerator()
     {
+        SelectedMenuItem = "ReportGenerator";
         // TODO: Implement navigation to Report Generator page
         Console.WriteLine("Navigate to Report Generator");
     }

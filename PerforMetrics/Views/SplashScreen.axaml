@@ -1,0 +1,109 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:PerforMetrics.ViewModels"
+             xmlns:li="using:LoadingIndicators.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="1440" d:DesignHeight="900"
+             x:Class="PerforMetrics.Views.SplashScreen"
+             x:DataType="vm:SplashScreenViewModel">
+
+  <Design.DataContext>
+    <vm:SplashScreenViewModel />
+  </Design.DataContext>
+
+  <UserControl.Styles>
+    <!-- Logo Animation -->
+    <Style Selector="StackPanel.logo">
+      <Style.Animations>
+        <Animation Duration="0:0:1" FillMode="Forward">
+          <KeyFrame Cue="0%">
+            <Setter Property="Opacity" Value="0"/>
+          </KeyFrame>
+          <KeyFrame Cue="100%">
+            <Setter Property="Opacity" Value="1"/>
+          </KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+
+    <!-- Version Animation -->
+    <Style Selector="TextBlock.version">
+      <Style.Animations>
+        <Animation Duration="0:0:0.5" Delay="0:0:0.5" FillMode="Forward">
+          <KeyFrame Cue="0%">
+            <Setter Property="Opacity" Value="0"/>
+          </KeyFrame>
+          <KeyFrame Cue="100%">
+            <Setter Property="Opacity" Value="1"/>
+          </KeyFrame>
+        </Animation>
+      </Style.Animations>
+    </Style>
+  </UserControl.Styles>
+
+  <Grid Background="#FFFFFF">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="*" />
+      <RowDefinition Height="Auto" />
+    </Grid.RowDefinitions>
+    
+    <!-- Main Content - Centered -->
+    <StackPanel Grid.Row="0"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Spacing="36">
+      
+      <!-- Logo Section -->
+      <StackPanel Classes="logo"
+                  HorizontalAlignment="Center"
+                  Spacing="16">
+        
+        <!-- PerforMetrics Logo Symbol -->
+        <Image Source="/Assets/performetrics-logo.png"
+               Width="180"
+               Height="130"
+               Stretch="Uniform"
+               HorizontalAlignment="Center" />
+        
+        <!-- Company Name -->
+        <TextBlock Text="PerforMetrics"
+                   FontSize="38"
+                   FontWeight="Bold"
+                   Foreground="#1E3A8A"
+                   LetterSpacing="2"
+                   HorizontalAlignment="Center" />
+        
+        <!-- Tagline -->
+        <TextBlock Text="motion capture solution"
+                   FontSize="13"
+                   FontWeight="Medium"
+                   Foreground="#6B7280"
+                   LetterSpacing="3"
+                   HorizontalAlignment="Center"
+                   Margin="0,4,0,0" />
+        
+      </StackPanel>
+
+      <!-- Loading Indicator -->
+      <li:LoadingIndicator IsActive="{Binding IsLoading}"
+                           Mode="Arcs"
+                           SpeedRatio="1.0"
+                           Foreground="#3B82F6"
+                           Width="72" Height="72"
+                           HorizontalAlignment="Center" />
+      
+    </StackPanel>
+
+    <!-- Version Info - Bottom -->
+    <TextBlock Grid.Row="1"
+               Classes="version"
+               Text="{Binding VersionInfo}"
+               FontSize="14"
+               Foreground="#9CA3AF"
+               HorizontalAlignment="Center"
+               Margin="0,0,0,24" />
+
+  </Grid>
+
+</UserControl>

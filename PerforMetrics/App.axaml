@@ -11,8 +11,13 @@
     </Application.DataTemplates>
 
     <Application.Resources>
-        <converters:StatusColorConverter x:Key="StatusColorConverter" />
-        <converters:StatusTextColorConverter x:Key="StatusTextColorConverter" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://LoadingIndicators.Avalonia/LoadingIndicators.axaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <converters:StatusColorConverter x:Key="StatusColorConverter" />
+            <converters:StatusTextColorConverter x:Key="StatusTextColorConverter" />
+        </ResourceDictionary>
     </Application.Resources>
   
     <Application.Styles>
