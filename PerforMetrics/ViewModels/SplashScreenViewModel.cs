@@ -16,7 +16,7 @@ public partial class SplashScreenViewModel : ViewModelBase
     private bool _isLoading = true;
 
     [ObservableProperty]
-    private string _versionInfo = "v1.0.0";
+    private string _versionInfo = "v0.0.1";
 
     /// <summary>
     /// Event raised when loading is complete

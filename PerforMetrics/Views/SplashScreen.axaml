@@ -52,12 +52,13 @@
     <StackPanel Grid.Row="0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
-                Spacing="36">
+                Spacing="0">
       
       <!-- Logo Section -->
       <StackPanel Classes="logo"
                   HorizontalAlignment="Center"
-                  Spacing="16">
+                  Spacing="16"
+                  Margin="0,50,0,0">
         
         <!-- PerforMetrics Logo Symbol -->
         <Image Source="/Assets/performetrics-logo.png"
@@ -90,7 +91,7 @@
                            Mode="Arcs"
                            SpeedRatio="1.0"
                            Foreground="#3B82F6"
-                           Width="72" Height="72"
+                           Width="94" Height="94"
                            HorizontalAlignment="Center" />
       
     </StackPanel>

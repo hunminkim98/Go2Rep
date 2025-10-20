@@ -114,16 +114,16 @@ def check_conda_env(conda_path, env_name="Go2Rep"):
 
 def create_conda_env(conda_path, env_name="Go2Rep"):
     """Conda 환경 생성"""
-    print_info(f"'{env_name}' Conda 환경을 생성하는 중...")
+    print_info(f"'{env_name}' Conda 환경 생성중...")
     try:
         subprocess.run(
             [conda_path, "create", "-n", env_name, "python=3.10", "-y"],
             check=True
         )
-        print_success(f"'{env_name}' 환경이 생성되었습니다")
+        print_success(f"'{env_name}' 환경 생성완료")
         return True
     except subprocess.CalledProcessError as e:
-        print_error(f"환경 생성 실패: {e}")
+        print_error(f"환경 생성 실패함: {e}")
         return False
 
 
@@ -167,7 +167,7 @@ def install_backend_dependencies(python_path, backend_dir):
         print_error(f"requirements.txt를 찾을 수 없습니다: {requirements_file}")
         return False
     
-    print_info("백엔드 Python 의존성을 설치하는 중...")
+    print_info("백엔드 Python 의존성 설치중...")
     try:
         subprocess.run(
             [python_path, "-m", "pip", "install", "-r", str(requirements_file)],
@@ -297,7 +297,7 @@ def main():
     env_name = "Go2Rep"
     
     if not check_conda_env(conda_path, env_name):
-        print_warning(f"'{env_name}' 환경이 존재하지 않습니다")
+        print_warning(f"'{env_name}' 환경 존재하지 않음")
         response = input(f"'{env_name}' 환경을 생성하시겠습니까? (y/n): ")
         if response.lower() == 'y':
             if not create_conda_env(conda_path, env_name):
@@ -306,12 +306,12 @@ def main():
             print_error("환경이 필요합니다. 종료합니다.")
             sys.exit(1)
     else:
-        print_success(f"'{env_name}' 환경이 존재합니다")
+        print_success(f"'{env_name}' 환경 존재함")
     
     # 3. Python 경로 가져오기
     python_path = get_conda_python(conda_path, env_name)
     if not python_path:
-        print_error("Conda 환경의 Python을 찾을 수 없습니다")
+        print_error("Conda 환경의 Python 찾을 수 없음")
         sys.exit(1)
     
     print_success(f"Python 경로: {python_path}")
@@ -319,7 +319,7 @@ def main():
     # 4. 백엔드 의존성 설치
     print_header("3. 백엔드 의존성 설치")
     if not install_backend_dependencies(python_path, backend_dir):
-        print_warning("의존성 설치 실패. 계속 진행합니다...")
+        print_warning("의존성 설치 실패함. 계속 진행중...")
     
     # 5. .NET SDK 확인
     print_header("4. .NET SDK 확인")
@@ -347,8 +347,8 @@ def main():
     # 8. 완료 메시지
     print_header("PerforMetrics 실행 중")
     print_success("백엔드: http://localhost:8000")
-    print_success("프론트엔드: 애플리케이션 창이 열렸습니다")
-    print_info("\n프로그램을 종료하려면 Ctrl+C를 누르세요\n")
+    print_success("프론트엔드: 애플리케이션 창")
+    # print_info("\n프로그램을 종료하려면 Ctrl+C를 누르세요\n")
     
     try:
         # 프론트엔드가 종료될 때까지 대기

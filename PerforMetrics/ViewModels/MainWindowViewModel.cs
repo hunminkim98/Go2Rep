@@ -52,7 +52,7 @@ public partial class MainWindowViewModel : ViewModelBase
         {
             // Expand window size for landing page
             WindowWidth = 1440;
-            WindowHeight = 900;
+            WindowHeight = 850;
             
             CurrentView = new LandingPage
             {

@@ -83,7 +83,7 @@ public partial class MainWindow : Window
                 // Set window position
                 Position = new PixelPoint((int)x, (int)y);
                 
-                Console.WriteLine($"Centered window: Size={windowWidth}x{windowHeight}, Position={Position}");
+                // Console.WriteLine($"Centered window: Size={windowWidth}x{windowHeight}, Position={Position}");
             }
         }
         catch (Exception ex)
