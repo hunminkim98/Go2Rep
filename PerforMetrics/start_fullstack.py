@@ -10,6 +10,8 @@ import platform
 import subprocess
 import time
 import shutil
+import socket
+import json
 from pathlib import Path
 
 
@@ -61,6 +63,24 @@ def get_os_type():
         return "windows"
     else:
         return "linux"
+
+
+def is_port_in_use(port, host='localhost'):
+    """포트가 사용 중인지 확인"""
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        try:
+            s.bind((host, port))
+            return False
+        except OSError:
+            return True
+
+
+def find_available_port(start_port=8000, max_attempts=100):
+    """사용 가능한 포트 찾기"""
+    for port in range(start_port, start_port + max_attempts):
+        if not is_port_in_use(port):
+            return port
+    return None
 
 
 def find_conda():
@@ -181,6 +201,32 @@ def install_backend_dependencies(python_path, backend_dir):
         return False
 
 
+def update_appsettings(frontend_dir, backend_port):
+    """appsettings.json의 백엔드 URL 업데이트"""
+    appsettings_path = frontend_dir / "appsettings.json"
+    
+    try:
+        # 파일 읽기
+        with open(appsettings_path, 'r', encoding='utf-8') as f:
+            settings = json.load(f)
+        
+        # Backend URL 업데이트
+        if "Backend" not in settings:
+            settings["Backend"] = {}
+        
+        settings["Backend"]["BaseUrl"] = f"http://localhost:{backend_port}"
+        
+        # 파일 쓰기
+        with open(appsettings_path, 'w', encoding='utf-8') as f:
+            json.dump(settings, f, indent=2, ensure_ascii=False)
+        
+        print_success(f"appsettings.json 업데이트 완료: port {backend_port}")
+        return True
+    except Exception as e:
+        print_warning(f"appsettings.json 업데이트 실패: {e}")
+        return False
+
+
 def check_dotnet():
     """dotnet SDK 설치 확인"""
     try:
@@ -198,24 +244,28 @@ def check_dotnet():
         print_info("https://dotnet.microsoft.com/download 에서 .NET 9.0 이상을 설치하세요")
         return False
 
-
-def start_backend(python_path, backend_dir):
+def start_backend(python_path, backend_dir, port):
     """백엔드 서버 시작"""
-    print_info("백엔드 서버를 시작하는 중...")
+    print_info(f"백엔드 서버를 포트 {port}에서 시작하는 중...")
     
     main_py = backend_dir / "main.py"
     if not main_py.exists():
         print_error(f"main.py를 찾을 수 없습니다: {main_py}")
-        return None
+        return None, None
     
     try:
         os_type = get_os_type()
+        
+        # 환경 변수 설정 (현재 환경 변수 복사 + API_PORT 추가)
+        env = os.environ.copy()
+        env['API_PORT'] = str(port)
         
         if os_type == "windows":
             # Windows에서는 CREATE_NEW_CONSOLE 플래그 사용
             process = subprocess.Popen(
                 [python_path, str(main_py)],
                 cwd=str(backend_dir),
+                env=env,
                 creationflags=subprocess.CREATE_NEW_CONSOLE if os_type == "windows" else 0,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE
@@ -225,6 +275,7 @@ def start_backend(python_path, backend_dir):
             process = subprocess.Popen(
                 [python_path, str(main_py)],
                 cwd=str(backend_dir),
+                env=env,
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 start_new_session=True
@@ -236,15 +287,15 @@ def start_backend(python_path, backend_dir):
         
         # 프로세스가 살아있는지 확인
         if process.poll() is None:
-            print_success("백엔드 서버가 시작되었습니다 (http://localhost:8000)")
-            return process
+            print_success(f"백엔드 서버가 시작되었습니다 (http://localhost:{port})")
+            return process, port
         else:
             print_error("백엔드 서버 시작 실패")
-            return None
+            return None, None
             
     except Exception as e:
         print_error(f"백엔드 시작 중 오류: {e}")
-        return None
+        return None, None
 
 
 def start_frontend(frontend_dir):
@@ -326,16 +377,38 @@ def main():
     if not check_dotnet():
         sys.exit(1)
     
-    # 6. 백엔드 시작
-    print_header("5. 백엔드 서버 시작")
-    backend_process = start_backend(python_path, backend_dir)
+    # 6. 사용 가능한 포트 찾기
+    print_header("5. 백엔드 포트 확인")
+    default_port = 8000
+    
+    if is_port_in_use(default_port):
+        print_warning(f"포트 {default_port}이(가) 이미 사용 중입니다")
+        available_port = find_available_port(default_port + 1)
+        
+        if available_port:
+            print_success(f"사용 가능한 포트 발견: {available_port}")
+            backend_port = available_port
+        else:
+            print_error("사용 가능한 포트를 찾을 수 없습니다 (8001-8100 범위)")
+            sys.exit(1)
+    else:
+        print_success(f"포트 {default_port} 사용 가능")
+        backend_port = default_port
+    
+    # 7. appsettings.json 업데이트
+    print_header("6. 프론트엔드 설정 업데이트")
+    update_appsettings(script_dir, backend_port)
+    
+    # 8. 백엔드 시작
+    print_header("7. 백엔드 서버 시작")
+    backend_process, actual_port = start_backend(python_path, backend_dir, backend_port)
     
     if not backend_process:
         print_error("백엔드 시작 실패")
         sys.exit(1)
     
-    # 7. 프론트엔드 시작
-    print_header("6. 프론트엔드 애플리케이션 시작")
+    # 9. 프론트엔드 시작
+    print_header("8. 프론트엔드 애플리케이션 시작")
     frontend_process = start_frontend(script_dir)
     
     if not frontend_process:
@@ -344,9 +417,9 @@ def main():
             backend_process.terminate()
         sys.exit(1)
     
-    # 8. 완료 메시지
+    # 10. 완료 메시지
     print_header("PerforMetrics 실행 중")
-    print_success("백엔드: http://localhost:8000")
+    print_success(f"백엔드: http://localhost:{actual_port}")
     print_success("프론트엔드: 애플리케이션 창")
     # print_info("\n프로그램을 종료하려면 Ctrl+C를 누르세요\n")
     

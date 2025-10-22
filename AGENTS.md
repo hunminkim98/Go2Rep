@@ -1,22 +1,33 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
-Go2Rep centers on two entry points: `main_gui.py` for the Tkinter controller and `PerforMetrics/` for the Avalonia client plus FastAPI backend (`Backend/`). Shared Python tooling lives in `tools/` for capture, sync, and reports. `GoPro/` hosts vendor tutorials and BLE/COHN protobufs. Calibration assets stay in `calib/`, visual media in `Assets/`, and `Drafts/` remains for prototypes only.
+- `main_gui.py`: legacy Tkinter launcher that still drives camera, sync, and reporting flows.
+- `tools/`: shared Python modules for BLE/WiFi control, calibration, Theia prep, and reports; imported wherever functionality is exposed.
+- `GoPro/`: protocol adapters and tutorial code—treat this as the SDK layer and coordinate signature changes with consumers.
+- `PerforMetrics/`: Avalonia desktop client plus FastAPI backend (`Backend/`); launcher scripts live beside the C# project, while reference data sits in `calib/`, `Assets/`, and `certifications/`.
 
 ## Build, Test, and Development Commands
-- Backend setup: `cd PerforMetrics/Backend && python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt`.
-- Legacy GUI: `conda activate Go2Rep` then `python main_gui.py` from the repo root.
-- Full desktop stack: `cd PerforMetrics && python3 start_fullstack.py` (starts FastAPI and Avalonia together).
-- Isolated services: `./Backend/start_backend.sh` (or `python main.py`) for the API; `dotnet build && dotnet run` for the Avalonia client.
+- `python3 start_fullstack.py`: validates the Go2Rep conda env, installs backend deps, launches FastAPI and Avalonia together.
+- `cd PerforMetrics/Backend && source venv/bin/activate && uvicorn main:app --reload`: backend only; use `start_backend.sh|.bat` for scripted startup.
+- `dotnet build PerforMetrics/PerforMetrics.csproj` then `dotnet run`: compile or debug the Avalonia UI independently.
+- `python main_gui.py`: bring up the legacy interface when reproducing existing workflows or triaging regressions.
 
 ## Coding Style & Naming Conventions
-Follow PEP 8 in Python: four-space indents, snake_case modules such as `tools/gopro_capture.py`, typed async flows, and module-level hardware constants. FastAPI routes should expose docstrings and return explicit JSON. Avalonia code follows MVVM expectations—PascalCase classes/properties, camelCase private fields, `ReactiveCommand` for actions, and clean `DataContext` bindings in XAML.
+- Python: follow PEP 8 with 4-space indentation, descriptive snake_case names, and guard script entry with `if __name__ == "__main__"`.
+- Centralise reusable logic in `tools/` and document async behaviour or hardware assumptions in module docstrings.
+- C#: stick to .NET casing; keep XAML names aligned with matching view models to preserve MVVM bindings.
 
 ## Testing Guidelines
-Automated tests are absent, so lean on scenario checks. For Python tools, exercise BLE/WiFi hardware paths and watch logger output. Backend changes should run `uvicorn main:app --reload` (or `python main.py`) and hit `/health` plus `/api/system/info`. For UI work, run `dotnet run`, confirm the backend status indicator, and capture screenshots of updates. Log each manual test sequence in your PR.
+- Place FastAPI tests under `PerforMetrics/Backend/tests/` using `pytest` with `httpx.AsyncClient`; run `python -m pytest PerforMetrics/Backend/tests` inside the venv.
+- Plan future Avalonia tests in a `PerforMetrics.Tests` project and execute with `dotnet test`; attach screenshots or screencasts for interim UI validation.
+- Record manual QA steps for camera connectivity or hardware-dependent paths in the PR description.
 
 ## Commit & Pull Request Guidelines
-History favors concise summaries (`for mac without GUI`); keep using present-tense lines like `Add COHN download retry` and group related edits together. PRs should state scope, list commands you ran, link issues, and share UI evidence when layouts change. Note configuration or credential impacts, especially under `certifications/` and calibration paths.
+- Write imperative commit subjects ≤72 chars (e.g., `feat: add BLE scan retries`) and add short bodies for behavioural changes.
+- Reference issues (`Refs #123`) and avoid bundling unrelated refactors; squash fixups before requesting review.
+- PRs must list executed checks, call out config or asset updates, and include visuals for UI-affecting work.
 
 ## Security & Configuration Tips
-Never commit live GoPro certificates; rely on the placeholders in `certifications/`. Store site calibration `.toml` files outside Git and surface paths through `config.py`. Redact camera identifiers in shared logs and keep generated media in external workspaces referenced by `settings.GOPRO_WORKSPACE_PATH`.
+- Keep certificates and WiFi secrets out of Git; store them locally under `certifications/` and load via environment variables or ignored config files.
+- Verify `appsettings.json`, backend `.env` files, and launcher scripts do not ship real credentials.
+- Share large calibration/media assets through links and document the expected install paths instead of committing binaries.
