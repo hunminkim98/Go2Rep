@@ -99,6 +99,19 @@
                       HorizontalScrollBarVisibility="Disabled">
           <StackPanel Margin="8,8,8,0">
             
+            <!-- Dashboard -->
+            <Button x:Name="DashboardButton"
+                    Classes="menu-item"
+                    Classes.selected="{Binding SelectedMenuItem, Converter={x:Static ObjectConverters.Equal}, ConverterParameter=Dashboard}"
+                    Command="{Binding NavigateToDashboardCommand}">
+              <StackPanel Orientation="Horizontal" Spacing="12">
+                <PathIcon Data="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"
+                          Width="16" Height="16"
+                          Foreground="{Binding $parent[Button].Foreground}" />
+                <TextBlock Text="Dashboard" VerticalAlignment="Center" />
+              </StackPanel>
+            </Button>
+            
             <!-- GoPro Control -->
             <Button x:Name="GoProControlButton"
                     Classes="menu-item"
@@ -277,55 +290,68 @@
       <!-- Main Content -->
       <Border Grid.Row="1"
               Background="{StaticResource BackgroundBrush}">
-        <StackPanel HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Spacing="16"
-                    MaxWidth="600">
-          
-          <!-- Status Message -->
-          <TextBlock Text="{Binding MainContentMessage}"
-                     FontSize="20"
-                     FontWeight="Medium"
-                     Foreground="{StaticResource TextPrimaryBrush}"
-                     TextAlignment="Center"
-                     TextWrapping="Wrap" />
+        <Grid>
+          <!-- Dynamic Content Area -->
+          <ContentControl Content="{Binding CurrentContentView}">
+            <ContentControl.ContentTemplate>
+              <DataTemplate>
+                <ContentControl Content="{Binding}" />
+              </DataTemplate>
+            </ContentControl.ContentTemplate>
+          </ContentControl>
 
-          <!-- Description -->
-          <TextBlock FontSize="14"
-                     Foreground="{StaticResource TextSecondaryBrush}"
-                     TextAlignment="Center"
-                     TextWrapping="Wrap">
-            <Run Text="You can purchase a GoPro from the " />
-            <Run Text="PerforMetrics Store" FontWeight="SemiBold" />
-            <Run Text=". After your purchase," />
-            <LineBreak />
-            <Run Text="explore the " />
-            <Run Text="PerforMetrics Documentation" FontWeight="SemiBold" />
-            <Run Text=" for comprehensive setup tutorials to get started." />
-          </TextBlock>
+          <!-- Default Home Content -->
+          <StackPanel HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Spacing="16"
+                      MaxWidth="600"
+                      IsVisible="{Binding CurrentContentView, Converter={x:Static ObjectConverters.IsNull}}">
+            
+            <!-- Status Message -->
+            <TextBlock Text="{Binding MainContentMessage}"
+                       FontSize="20"
+                       FontWeight="Medium"
+                       Foreground="{StaticResource TextPrimaryBrush}"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap" />
 
-          <!-- Backend Status Indicator -->
-          <Border Background="{StaticResource SidebarBrush}"
-                  BorderBrush="{StaticResource BorderBrush}"
-                  BorderThickness="1"
-                  CornerRadius="8"
-                  Padding="16,12"
-                  HorizontalAlignment="Center">
-            <StackPanel Orientation="Horizontal" Spacing="12">
-              <Ellipse Width="12" Height="12" 
-                       VerticalAlignment="Center">
-                <Ellipse.Fill>
-                  <SolidColorBrush Color="{Binding IsBackendConnected, Converter={StaticResource StatusColorConverter}}" />
-                </Ellipse.Fill>
-              </Ellipse>
-              <TextBlock Text="{Binding BackendStatus}"
-                         Foreground="{Binding IsBackendConnected, Converter={StaticResource StatusTextColorConverter}}"
-                         FontSize="13"
-                         VerticalAlignment="Center" />
-            </StackPanel>
-          </Border>
+            <!-- Description -->
+            <TextBlock FontSize="14"
+                       Foreground="{StaticResource TextSecondaryBrush}"
+                       TextAlignment="Center"
+                       TextWrapping="Wrap">
+              <Run Text="You can purchase a GoPro from the " />
+              <Run Text="PerforMetrics Store" FontWeight="SemiBold" />
+              <Run Text=". After your purchase," />
+              <LineBreak />
+              <Run Text="explore the " />
+              <Run Text="PerforMetrics Documentation" FontWeight="SemiBold" />
+              <Run Text=" for comprehensive setup tutorials to get started." />
+            </TextBlock>
 
-        </StackPanel>
+            <!-- Backend Status Indicator -->
+            <Border Background="{StaticResource SidebarBrush}"
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="16,12"
+                    HorizontalAlignment="Center">
+              <StackPanel Orientation="Horizontal" Spacing="12">
+                <Ellipse Width="12" Height="12" 
+                         VerticalAlignment="Center">
+                  <Ellipse.Fill>
+                    <SolidColorBrush Color="{Binding IsBackendConnected, Converter={StaticResource StatusColorConverter}}" />
+                  </Ellipse.Fill>
+                </Ellipse>
+                <TextBlock Text="{Binding BackendStatus}"
+                           Foreground="{Binding IsBackendConnected, Converter={StaticResource StatusTextColorConverter}}"
+                           FontSize="13"
+                           VerticalAlignment="Center" />
+              </StackPanel>
+            </Border>
+
+          </StackPanel>
+        </Grid>
       </Border>
 
     </Grid>

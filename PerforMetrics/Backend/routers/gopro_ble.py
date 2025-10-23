@@ -6,6 +6,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import List, Optional
 import asyncio
+from bleak import BleakScanner
 
 router = APIRouter()
 
@@ -38,18 +39,48 @@ async def scan_gopros():
     
     Returns list of discovered GoPro devices
     """
+    import logging
+    logger = logging.getLogger(__name__)
+    
     try:
-        # TODO: Implement actual BLE scanning using GoPro/BLE/scan_gopros.py
-        # For now, return mock data for testing
-        return [
-            GoProDevice(
-                identifier="8577",
-                name="GoPro 8577",
-                address="AA:BB:CC:DD:EE:FF",
-                connected=False
-            )
-        ]
+        logger.info("Starting BLE scan...")
+        matched_devices = []
+        
+        # Scan with longer timeout for better detection
+        devices = await BleakScanner.discover(timeout=10.0)
+        logger.info(f"BLE scan completed. Found {len(devices)} total devices.")
+        
+        if not devices:
+            logger.warning("No Bluetooth devices found at all. Check Bluetooth permissions and hardware.")
+            return []
+        
+        # Log all discovered devices for debugging
+        for device in devices:
+            logger.debug(f"Found device: {device.name} ({device.address})")
+            if device.name and "GoPro" in device.name:
+                # Extract identifier (last 4 digits) from device name
+                # e.g., "GoPro 1234" -> "1234"
+                identifier = device.name.split(" ")[-1] if " " in device.name else device.name
+                
+                logger.info(f"Matched GoPro: {device.name} (identifier: {identifier})")
+                matched_devices.append(GoProDevice(
+                    identifier=identifier,
+                    name=device.name,
+                    address=device.address,
+                    connected=False
+                ))
+        
+        logger.info(f"Scan completed. Found {len(matched_devices)} GoPro device(s).")
+        return matched_devices
+        
+    except PermissionError as e:
+        logger.error(f"Permission error during BLE scan: {str(e)}")
+        raise HTTPException(
+            status_code=403, 
+            detail=f"Bluetooth permission denied. Please grant Bluetooth access to the application. Error: {str(e)}"
+        )
     except Exception as e:
+        logger.error(f"BLE scan failed with error: {str(e)}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"BLE scan failed: {str(e)}")
 
 
@@ -168,5 +199,65 @@ async def power_off_gopro(identifier: str):
         raise HTTPException(
             status_code=500,
             detail=f"Power off failed: {str(e)}"
+        )
+
+
+@router.get("/health/{identifier}")
+async def check_device_health(identifier: str):
+    """
+    Check if a specific GoPro device is still connected and responsive
+    
+    Args:
+        identifier: Last 4 digits of GoPro serial number
+        
+    Returns:
+        200 if device is connected and responsive
+        503 if device is not connected or not responsive
+    """
+    try:
+        # TODO: Implement actual health check by querying device status
+        # In real implementation, this would:
+        # 1. Check if device is in connected devices list
+        # 2. Try to query device status/battery level
+        # 3. Return 200 if responsive, 503 if not
+        
+        raise HTTPException(
+            status_code=503,
+            detail=f"GoPro {identifier} health check not implemented"
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=503,
+            detail=f"Health check failed for GoPro {identifier}: {str(e)}"
+        )
+
+
+@router.post("/reconnect/{identifier}")
+async def reconnect_gopro(identifier: str):
+    """
+    Attempt to reconnect to a specific GoPro camera
+    
+    Args:
+        identifier: Last 4 digits of GoPro serial number
+    """
+    try:
+        # TODO: Implement actual reconnection logic
+        # This should:
+        # 1. Check if device is already connected
+        # 2. If not, attempt BLE reconnection
+        # 3. Restore previous settings if needed
+        
+        raise HTTPException(
+            status_code=503,
+            detail=f"GoPro {identifier} reconnection not implemented"
+        )
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(
+            status_code=503,
+            detail=f"Reconnection failed for GoPro {identifier}: {str(e)}"
         )
 

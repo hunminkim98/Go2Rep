@@ -37,6 +37,12 @@ public partial class LandingPageViewModel : ViewModelBase
     [ObservableProperty]
     private string _mainContentMessage = "DepthAI connected, awaiting device...";
 
+    [ObservableProperty]
+    private object? _currentContentView;
+
+    // Singleton instances for view models to persist state across navigation
+    private GoProControlViewModel? _goProControlViewModel;
+
     public ObservableCollection<string> ProjectOptions { get; }
 
     public LandingPageViewModel()
@@ -49,8 +55,11 @@ public partial class LandingPageViewModel : ViewModelBase
             "No options available"
         };
         
+        // Set Dashboard as default selected menu item
+        SelectedMenuItem = "Dashboard";
+        
         // Setup periodic health check
-        _healthCheckTimer = new Timer(5000); // Check every 5 seconds
+        _healthCheckTimer = new Timer(30000); // Check every 30 seconds (백엔드 로그 감소)
         _healthCheckTimer.Elapsed += async (sender, e) => await CheckBackendHealthAsync();
         _healthCheckTimer.Start();
         
@@ -89,14 +98,51 @@ public partial class LandingPageViewModel : ViewModelBase
     }
 
     /// <summary>
+    /// Navigate to Dashboard (home page)
+    /// </summary>
+    [RelayCommand]
+    private void NavigateToDashboard()
+    {
+        SelectedMenuItem = "Dashboard";
+        CurrentContentView = null; // Reset to home view
+    }
+
+    /// <summary>
     /// Navigate to GoPro Control page
     /// </summary>
     [RelayCommand]
     private void NavigateToGoProControl()
     {
         SelectedMenuItem = "GoProControl";
-        // TODO: Implement navigation to GoPro Control page
-        Console.WriteLine("Navigate to GoPro Control");
+        
+        // Use singleton pattern to maintain connection state across navigation
+        if (_goProControlViewModel == null)
+        {
+            _goProControlViewModel = new GoProControlViewModel();
+            
+            // Try to get the main window for dialog owner
+            try
+            {
+                var mainWindow = Avalonia.Application.Current?.ApplicationLifetime 
+                    is Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop
+                    ? desktop.MainWindow
+                    : null;
+                
+                if (mainWindow != null)
+                {
+                    _goProControlViewModel.SetOwnerWindow(mainWindow);
+                }
+            }
+            catch
+            {
+                // Ignore if can't get window reference
+            }
+        }
+        
+        CurrentContentView = new Views.GoProControlView
+        {
+            DataContext = _goProControlViewModel
+        };
     }
 
     /// <summary>
@@ -106,8 +152,8 @@ public partial class LandingPageViewModel : ViewModelBase
     private void NavigateToSynchronization()
     {
         SelectedMenuItem = "Synchronization";
-        // TODO: Implement navigation to Synchronization page
-        Console.WriteLine("Navigate to Synchronization");
+        CurrentContentView = null; // Reset to home view for now
+        // TODO: Implement Synchronization view
     }
 
     /// <summary>
@@ -117,8 +163,8 @@ public partial class LandingPageViewModel : ViewModelBase
     private void NavigateToClassification()
     {
         SelectedMenuItem = "Classification";
-        // TODO: Implement navigation to Classification page
-        Console.WriteLine("Navigate to Classification");
+        CurrentContentView = null; // Reset to home view for now
+        // TODO: Implement Classification view
     }
 
     /// <summary>
@@ -128,8 +174,8 @@ public partial class LandingPageViewModel : ViewModelBase
     private void NavigateToCalibration()
     {
         SelectedMenuItem = "Calibration";
-        // TODO: Implement navigation to Calibration page
-        Console.WriteLine("Navigate to Calibration");
+        CurrentContentView = null; // Reset to home view for now
+        // TODO: Implement Calibration view
     }
 
     /// <summary>
@@ -139,8 +185,8 @@ public partial class LandingPageViewModel : ViewModelBase
     private void NavigateToMotionAnalysis()
     {
         SelectedMenuItem = "MotionAnalysis";
-        // TODO: Implement navigation to Motion Analysis page
-        Console.WriteLine("Navigate to Motion Analysis");
+        CurrentContentView = null; // Reset to home view for now
+        // TODO: Implement Motion Analysis view
     }
 
     /// <summary>
@@ -150,8 +196,8 @@ public partial class LandingPageViewModel : ViewModelBase
     private void NavigateToReportGenerator()
     {
         SelectedMenuItem = "ReportGenerator";
-        // TODO: Implement navigation to Report Generator page
-        Console.WriteLine("Navigate to Report Generator");
+        CurrentContentView = null; // Reset to home view for now
+        // TODO: Implement Report Generator view
     }
 
     /// <summary>
@@ -161,6 +207,7 @@ public partial class LandingPageViewModel : ViewModelBase
     {
         _healthCheckTimer?.Stop();
         _healthCheckTimer?.Dispose();
+        _goProControlViewModel?.Dispose();
     }
 }
 

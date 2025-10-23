@@ -17,6 +17,7 @@
             </ResourceDictionary.MergedDictionaries>
             <converters:StatusColorConverter x:Key="StatusColorConverter" />
             <converters:StatusTextColorConverter x:Key="StatusTextColorConverter" />
+            <converters:BoolToStringConverter x:Key="BoolToStringConverter" />
         </ResourceDictionary>
     </Application.Resources>
   

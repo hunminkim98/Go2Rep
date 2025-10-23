@@ -1,0 +1,99 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:PerforMetrics.ViewModels"
+        x:Class="PerforMetrics.Views.WiFiProvisionDialog"
+        x:DataType="vm:WiFiProvisionDialogViewModel"
+        Title="GoPro WiFi 프로비저닝"
+        Width="500"
+        Height="350"
+        WindowStartupLocation="CenterOwner"
+        CanResize="False">
+
+    <Design.DataContext>
+        <vm:WiFiProvisionDialogViewModel GoProIdentifier="2424" />
+    </Design.DataContext>
+
+    <Grid Margin="30">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="{Binding GoProIdentifier, StringFormat='GoPro {0}을(를) WiFi로 연결합니다'}"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"/>
+        </StackPanel>
+
+        <!-- Instructions -->
+        <TextBlock Grid.Row="2"
+                   Text="GoPro가 연결할 WiFi 네트워크 정보를 입력하세요."
+                   TextWrapping="Wrap"
+                   Foreground="#666666"/>
+
+        <!-- SSID Input -->
+        <StackPanel Grid.Row="4">
+            <TextBlock Text="WiFi SSID (네트워크 이름)"
+                       FontWeight="SemiBold"
+                       Margin="0,0,0,8"/>
+            <TextBox Text="{Binding Ssid}"
+                     Watermark="WiFi 네트워크 이름을 입력하세요"
+                     FontSize="14"
+                     Padding="10"/>
+        </StackPanel>
+
+        <!-- Password Input -->
+        <StackPanel Grid.Row="6">
+            <TextBlock Text="WiFi 비밀번호"
+                       FontWeight="SemiBold"
+                       Margin="0,0,0,8"/>
+            <TextBox Text="{Binding Password}"
+                     Watermark="비밀번호를 입력하세요 (최소 8자)"
+                     PasswordChar="●"
+                     FontSize="14"
+                     Padding="10"/>
+        </StackPanel>
+
+        <!-- Error Message -->
+        <Border Grid.Row="8"
+                Background="#FFEBEE"
+                CornerRadius="5"
+                Padding="12"
+                IsVisible="{Binding HasError}">
+            <TextBlock Text="{Binding ErrorMessage}"
+                       Foreground="#C62828"
+                       TextWrapping="Wrap"/>
+        </Border>
+
+        <!-- Buttons -->
+        <StackPanel Grid.Row="10"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Spacing="10">
+            <Button Content="취소"
+                    Width="100"
+                    Height="35"
+                    Click="CancelButton_Click"
+                    Background="#F5F5F5"/>
+            <Button Content="연결"
+                    Width="100"
+                    Height="35"
+                    Click="ConfirmButton_Click"
+                    Background="#2196F3"
+                    Foreground="White"
+                    FontWeight="SemiBold"/>
+        </StackPanel>
+    </Grid>
+</Window>
+

@@ -2,12 +2,21 @@
 PerforMetrics Backend Server
 FastAPI-based REST API for GoPro control and motion analysis
 """
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import sys
 import os
+import time
+import logging
 from pathlib import Path
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
 # Add GoPro module path
 gopro_path = str(Path(__file__).parent.parent.parent / "GoPro")
@@ -34,6 +43,24 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Add request logging middleware
+@app.middleware("http")
+async def log_requests(request: Request, call_next):
+    # Skip logging for health check endpoint to reduce noise
+    skip_logging = request.url.path == "/health"
+    
+    start_time = time.time()
+    if not skip_logging:
+        logger.info(f"🔵 Incoming request: {request.method} {request.url.path}")
+    
+    response = await call_next(request)
+    
+    duration = time.time() - start_time
+    if not skip_logging:
+        logger.info(f"✅ Completed: {request.method} {request.url.path} - Status: {response.status_code} - Duration: {duration:.2f}s")
+    
+    return response
 
 # Include routers
 app.include_router(gopro_ble.router, prefix="/api/gopro/ble", tags=["GoPro BLE"])

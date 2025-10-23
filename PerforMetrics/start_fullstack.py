@@ -244,8 +244,15 @@ def check_dotnet():
         print_info("https://dotnet.microsoft.com/download 에서 .NET 9.0 이상을 설치하세요")
         return False
 
-def start_backend(python_path, backend_dir, port):
-    """백엔드 서버 시작"""
+def start_backend(python_path, backend_dir, port, verbose=True):
+    """백엔드 서버 시작
+    
+    Args:
+        python_path: Python 실행 파일 경로
+        backend_dir: 백엔드 디렉토리 경로
+        port: 백엔드 포트 번호
+        verbose: True이면 백엔드 로그 출력, False이면 숨김
+    """
     print_info(f"백엔드 서버를 포트 {port}에서 시작하는 중...")
     
     main_py = backend_dir / "main.py"
@@ -266,20 +273,26 @@ def start_backend(python_path, backend_dir, port):
                 [python_path, str(main_py)],
                 cwd=str(backend_dir),
                 env=env,
-                creationflags=subprocess.CREATE_NEW_CONSOLE if os_type == "windows" else 0,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE
+                creationflags=subprocess.CREATE_NEW_CONSOLE if os_type == "windows" else 0
             )
         else:
-            # macOS/Linux에서는 nohup 사용
-            process = subprocess.Popen(
-                [python_path, str(main_py)],
-                cwd=str(backend_dir),
-                env=env,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-                start_new_session=True
-            )
+            # macOS/Linux - verbose 플래그에 따라 로그 출력 여부 결정
+            if verbose:
+                # 백엔드 로그를 터미널에 출력
+                process = subprocess.Popen(
+                    [python_path, str(main_py)],
+                    cwd=str(backend_dir),
+                    env=env
+                )
+            else:
+                # 백엔드 로그를 숨김
+                process = subprocess.Popen(
+                    [python_path, str(main_py)],
+                    cwd=str(backend_dir),
+                    env=env,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.DEVNULL
+                )
         
         # 백엔드 시작 대기
         print_info("백엔드 시작을 기다리는 중... (5초)")
@@ -298,7 +311,7 @@ def start_backend(python_path, backend_dir, port):
         return None, None
 
 
-def start_frontend(frontend_dir):
+def start_frontend(frontend_dir, backend_port):
     """프론트엔드 앱 시작"""
     print_info("프론트엔드 애플리케이션을 시작하는 중...")
     
@@ -308,11 +321,16 @@ def start_frontend(frontend_dir):
         return None
     
     try:
+        # 환경 변수 설정 (백엔드 URL 전달)
+        env = os.environ.copy()
+        env["BACKEND_URL"] = f"http://localhost:{backend_port}"
+        
         # dotnet run을 포그라운드에서 실행
-        print_success("프론트엔드를 시작합니다...")
+        print_success(f"프론트엔드를 시작합니다 (백엔드: {env['BACKEND_URL']})...")
         process = subprocess.Popen(
             ["dotnet", "run"],
-            cwd=str(frontend_dir)
+            cwd=str(frontend_dir),
+            env=env  # 환경 변수 전달
         )
         return process
         
@@ -325,12 +343,18 @@ def main():
     """메인 함수"""
     print_header("PerforMetrics Full Stack Launcher")
     
+    # ===== 설정 영역 =====
+    backend_verb = True  # True: 백엔드 로그 출력, False: 백엔드 로그 숨김
+    # ===================
+    
     # 현재 디렉토리 확인
     script_dir = Path(__file__).parent.resolve()
     backend_dir = script_dir / "Backend"
     
     print_info(f"작업 디렉토리: {script_dir}")
     print_info(f"운영체제: {get_os_type().upper()}")
+    if not backend_verb:
+        print_info("백엔드 로그: 숨김 모드")
     
     # 1. Conda 확인
     print_header("1. Conda 환경 확인")
@@ -401,7 +425,7 @@ def main():
     
     # 8. 백엔드 시작
     print_header("7. 백엔드 서버 시작")
-    backend_process, actual_port = start_backend(python_path, backend_dir, backend_port)
+    backend_process, actual_port = start_backend(python_path, backend_dir, backend_port, verbose=backend_verb)
     
     if not backend_process:
         print_error("백엔드 시작 실패")
@@ -409,7 +433,7 @@ def main():
     
     # 9. 프론트엔드 시작
     print_header("8. 프론트엔드 애플리케이션 시작")
-    frontend_process = start_frontend(script_dir)
+    frontend_process = start_frontend(script_dir, actual_port)
     
     if not frontend_process:
         print_error("프론트엔드 시작 실패")
