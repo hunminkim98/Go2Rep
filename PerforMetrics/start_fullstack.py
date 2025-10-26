@@ -202,11 +202,27 @@ def install_backend_dependencies(python_path, backend_dir):
 
 
 def update_appsettings(frontend_dir, backend_port):
-    """appsettings.json의 백엔드 URL 업데이트"""
+    """appsettings.json의 백엔드 URL 업데이트 (WiFi 설정 보존)"""
     appsettings_path = frontend_dir / "appsettings.json"
+    build_appsettings_path = frontend_dir / "bin" / "Debug" / "net9.0" / "appsettings.json"
     
     try:
-        # 파일 읽기
+        # 빌드 출력 디렉토리의 WiFi 설정 백업 (있는 경우)
+        wifi_profiles = None
+        wifi_settings = None
+        
+        if build_appsettings_path.exists():
+            try:
+                with open(build_appsettings_path, 'r', encoding='utf-8') as f:
+                    build_settings = json.load(f)
+                    wifi_profiles = build_settings.get("WiFiProfiles")
+                    wifi_settings = build_settings.get("WiFiSettings")
+                    if wifi_profiles or (wifi_settings and wifi_settings.get("Ssid")):
+                        print_info(f"기존 WiFi 설정 발견 - 보존합니다")
+            except Exception as e:
+                print_warning(f"빌드 출력 파일 읽기 실패: {e}")
+        
+        # 소스 파일 읽기
         with open(appsettings_path, 'r', encoding='utf-8') as f:
             settings = json.load(f)
         
@@ -216,7 +232,13 @@ def update_appsettings(frontend_dir, backend_port):
         
         settings["Backend"]["BaseUrl"] = f"http://localhost:{backend_port}"
         
-        # 파일 쓰기
+        # 백업한 WiFi 설정 복원 (있는 경우)
+        if wifi_profiles is not None:
+            settings["WiFiProfiles"] = wifi_profiles
+        if wifi_settings is not None:
+            settings["WiFiSettings"] = wifi_settings
+        
+        # 소스 파일 쓰기
         with open(appsettings_path, 'w', encoding='utf-8') as f:
             json.dump(settings, f, indent=2, ensure_ascii=False)
         
@@ -261,38 +283,27 @@ def start_backend(python_path, backend_dir, port, verbose=True):
         return None, None
     
     try:
-        os_type = get_os_type()
-        
         # 환경 변수 설정 (현재 환경 변수 복사 + API_PORT 추가)
         env = os.environ.copy()
         env['API_PORT'] = str(port)
         
-        if os_type == "windows":
-            # Windows에서는 CREATE_NEW_CONSOLE 플래그 사용
+        # verbose 플래그에 따라 로그 출력 여부 결정 (모든 OS 동일)
+        if verbose:
+            # 백엔드 로그를 현재 터미널에 출력
+            process = subprocess.Popen(
+                [python_path, str(main_py)],
+                cwd=str(backend_dir),
+                env=env
+            )
+        else:
+            # 백엔드 로그를 숨김
             process = subprocess.Popen(
                 [python_path, str(main_py)],
                 cwd=str(backend_dir),
                 env=env,
-                creationflags=subprocess.CREATE_NEW_CONSOLE if os_type == "windows" else 0
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL
             )
-        else:
-            # macOS/Linux - verbose 플래그에 따라 로그 출력 여부 결정
-            if verbose:
-                # 백엔드 로그를 터미널에 출력
-                process = subprocess.Popen(
-                    [python_path, str(main_py)],
-                    cwd=str(backend_dir),
-                    env=env
-                )
-            else:
-                # 백엔드 로그를 숨김
-                process = subprocess.Popen(
-                    [python_path, str(main_py)],
-                    cwd=str(backend_dir),
-                    env=env,
-                    stdout=subprocess.DEVNULL,
-                    stderr=subprocess.DEVNULL
-                )
         
         # 백엔드 시작 대기
         print_info("백엔드 시작을 기다리는 중... (5초)")

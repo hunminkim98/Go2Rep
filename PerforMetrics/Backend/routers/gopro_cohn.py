@@ -13,6 +13,10 @@ from pathlib import Path
 from base64 import b64encode
 import requests
 from bleak import BleakScanner
+import urllib3
+
+# Disable SSL warnings for self-signed certificates
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 # Add GoPro module path
 gopro_path = str(Path(__file__).parent.parent.parent.parent / "GoPro")
@@ -233,6 +237,7 @@ async def provision_gopro(request: ProvisionRequest):
         with open(creds_file, "a") as txt_file:
             txt_file.write(json.dumps(creds_data, indent=4) + "\n\n")
         
+        logger.info(f"COHN provisioning completed for GoPro {request.identifier}")
         return {
             "status": "success",
             "message": f"COHN provisioning completed for GoPro {request.identifier}",
@@ -241,6 +246,7 @@ async def provision_gopro(request: ProvisionRequest):
             "certificate_path": str(cert_path)
         }
     except Exception as e:
+        logger.error(f"COHN provisioning failed for {request.identifier}: {str(e)}")
         raise HTTPException(
             status_code=500,
             detail=f"COHN provisioning failed: {str(e)}"
@@ -337,11 +343,12 @@ async def control_cohn_recording(command: COHNRecordingCommand):
             
             # Send HTTPS request
             try:
+                # Disable SSL verification for self-signed GoPro certificates
                 response = requests.get(
                     url,
                     timeout=10,
                     headers=headers,
-                    verify=cert_path
+                    verify=False
                 )
                 response.raise_for_status()
                 results.append({
@@ -349,6 +356,7 @@ async def control_cohn_recording(command: COHNRecordingCommand):
                     "success": True
                 })
             except requests.exceptions.RequestException as e:
+                logger.error(f"Recording {action} failed for {identifier}: {str(e)}")
                 results.append({
                     "identifier": identifier,
                     "success": False,
@@ -460,18 +468,18 @@ async def change_cohn_settings(command: COHNSettingsCommand):
                         params=params,
                         timeout=10,
                         headers=headers,
-                        verify=cert_path
+                        verify=False
                     )
                     response.raise_for_status()
                 except requests.exceptions.RequestException as e:
                     device_success = False
-                    errors.append(f"Resolution change failed: {str(e)}")
+                    errors.append(f"Resolution: {str(e)}")
             
             # Change FPS if specified
             if command.fps:
                 fps_id = fps_map[command.fps]
                 url = f"https://{ip_address}/gopro/camera/setting"
-                params = {"setting": 234, "option": fps_id}  # Setting 234 is FPS for GoPro 13
+                params = {"setting": 234, "option": fps_id}
                 
                 try:
                     response = requests.get(
@@ -479,12 +487,12 @@ async def change_cohn_settings(command: COHNSettingsCommand):
                         params=params,
                         timeout=10,
                         headers=headers,
-                        verify=cert_path
+                        verify=False
                     )
                     response.raise_for_status()
                 except requests.exceptions.RequestException as e:
                     device_success = False
-                    errors.append(f"FPS change failed: {str(e)}")
+                    errors.append(f"FPS: {str(e)}")
             
             if device_success:
                 results.append({

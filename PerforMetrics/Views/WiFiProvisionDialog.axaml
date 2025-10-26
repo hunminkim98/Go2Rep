@@ -3,9 +3,9 @@
         xmlns:vm="using:PerforMetrics.ViewModels"
         x:Class="PerforMetrics.Views.WiFiProvisionDialog"
         x:DataType="vm:WiFiProvisionDialogViewModel"
-        Title="GoPro WiFi 프로비저닝"
+        Title="{Binding DialogTitle}"
         Width="500"
-        Height="350"
+        Height="500"
         WindowStartupLocation="CenterOwner"
         CanResize="False">
 
@@ -22,6 +22,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="15"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="15"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="20"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -30,7 +32,7 @@
 
         <!-- Header -->
         <StackPanel Grid.Row="0">
-            <TextBlock Text="{Binding GoProIdentifier, StringFormat='GoPro {0}을(를) WiFi로 연결합니다'}"
+            <TextBlock Text="{Binding DialogTitle}"
                        FontSize="18"
                        FontWeight="Bold"
                        HorizontalAlignment="Center"/>
@@ -42,8 +44,26 @@
                    TextWrapping="Wrap"
                    Foreground="#666666"/>
 
-        <!-- SSID Input -->
+        <!-- WiFi Profile Selection -->
         <StackPanel Grid.Row="4">
+            <TextBlock Text="저장된 WiFi 프로필 (선택 시 자동 입력)"
+                       FontWeight="SemiBold"
+                       Margin="0,0,0,8"/>
+            <ComboBox ItemsSource="{Binding WiFiProfiles}"
+                      SelectedItem="{Binding SelectedProfile}"
+                      PlaceholderText="새로 입력하거나 저장된 프로필 선택..."
+                      FontSize="14"
+                      HorizontalAlignment="Stretch">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding DisplayName}"/>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </StackPanel>
+
+        <!-- SSID Input -->
+        <StackPanel Grid.Row="6">
             <TextBlock Text="WiFi SSID (네트워크 이름)"
                        FontWeight="SemiBold"
                        Margin="0,0,0,8"/>
@@ -54,7 +74,7 @@
         </StackPanel>
 
         <!-- Password Input -->
-        <StackPanel Grid.Row="6">
+        <StackPanel Grid.Row="8">
             <TextBlock Text="WiFi 비밀번호"
                        FontWeight="SemiBold"
                        Margin="0,0,0,8"/>
@@ -66,7 +86,7 @@
         </StackPanel>
 
         <!-- Error Message -->
-        <Border Grid.Row="8"
+        <Border Grid.Row="10"
                 Background="#FFEBEE"
                 CornerRadius="5"
                 Padding="12"
@@ -77,7 +97,7 @@
         </Border>
 
         <!-- Buttons -->
-        <StackPanel Grid.Row="10"
+        <StackPanel Grid.Row="12"
                     Orientation="Horizontal"
                     HorizontalAlignment="Right"
                     Spacing="10">

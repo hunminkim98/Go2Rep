@@ -77,14 +77,22 @@ public partial class GoProControlViewModel : ViewModelBase
      * - C#: private readonly int _constantValue = 42; (컴파일러가 변경 방지)
      */
     private readonly ApiService _apiService; // API 통신 서비스 객체 - 한 번 생성되면 변경되지 않음
+    private readonly SettingsService _settingsService; // 설정 관리 서비스 객체
     
     /* C# 명명 규칙:
      * - private 필드는 언더스코어(_)로 시작하고 camelCase 사용: _apiService
      * - public 프로퍼티는 PascalCase 사용: ApiService
      * - Python은 보통 snake_case: api_service
      */
-    // COHN 방식에서는 타이머를 사용하지 않으므로 nullable로 선언
-    private readonly Timer? _connectionHealthTimer; // 연결 상태 주기 점검용 타이머 (BLE 전용, COHN에서는 사용 안 함)
+    
+    /* ===== COHN 방식에서는 Health Check 타이머 불필요 =====
+     * BLE 방식에서는 주기적인 연결 상태 체크를 위해 타이머를 사용했지만,
+     * COHN(HTTP) 방식에서는 요청 실패 시 즉시 에러를 알 수 있으므로
+     * 타이머가 필요하지 않습니다. 따라서 이 필드는 주석 처리합니다.
+     * 
+     * 기존 BLE 방식 코드:
+     * private readonly Timer? _connectionHealthTimer;
+     */
     
     /* ===== Nullable 타입 (?) =====
      * C#에서 ?는 해당 타입이 null 값을 가질 수 있음을 나타냅니다.
@@ -220,6 +228,7 @@ public partial class GoProControlViewModel : ViewModelBase
          * C#에서는 반드시 new 키워드를 명시해야 합니다.
          */
         _apiService = new ApiService(); // ApiService 객체 생성
+        _settingsService = new SettingsService(); // SettingsService 객체 생성
         _goProDevices = new ObservableCollection<GoProDevice>(); // 빈 컬렉션 생성
         
         /* ===== COHN 방식에서는 Health Check 타이머 불필요 =====
@@ -769,6 +778,81 @@ public partial class GoProControlViewModel : ViewModelBase
     }
 
     /// <summary>
+    /// Open global WiFi settings dialog
+    /// 전역 WiFi 설정 다이얼로그를 엽니다
+    /// </summary>
+    [RelayCommand]
+    private async Task OpenWiFiSettingsAsync()
+    {
+        if (_ownerWindow == null)
+        {
+            StatusMessage = "다이얼로그를 표시할 수 없습니다.";
+            return;
+        }
+
+        try
+        {
+            // Load existing WiFi profiles
+            var profiles = await _settingsService.LoadWiFiProfilesAsync();
+            var profilesCollection = new ObservableCollection<WiFiProfile>(profiles);
+            
+            // Create dialog ViewModel
+            var dialogViewModel = new WiFiProvisionDialogViewModel();
+            dialogViewModel.LoadProfiles(profilesCollection);
+            
+            // If there are profiles, select the most recent one
+            if (profiles.Any())
+            {
+                dialogViewModel.SelectedProfile = profiles.First();
+            }
+
+            var dialog = new WiFiProvisionDialog
+            {
+                DataContext = dialogViewModel
+            };
+
+            var result = await dialog.ShowDialog<bool?>(_ownerWindow);
+
+            // User clicked confirm
+            if (result == true)
+            {
+                if (!dialogViewModel.ValidateInput())
+                {
+                    StatusMessage = "WiFi 설정이 유효하지 않습니다.";
+                    return;
+                }
+
+                // Save as WiFi profile
+                var profile = new WiFiProfile
+                {
+                    Ssid = dialogViewModel.Ssid,
+                    Password = dialogViewModel.Password
+                };
+
+                var (success, errorMessage) = await _settingsService.SaveWiFiProfileAsync(profile);
+
+                if (success)
+                {
+                    StatusMessage = $"WiFi 프로필이 저장되었습니다: {profile.Ssid}";
+                }
+                else
+                {
+                    var filePath = _settingsService.GetSettingsFilePath();
+                    StatusMessage = $"WiFi 설정 저장 실패: {errorMessage} (경로: {filePath})";
+                }
+            }
+            else
+            {
+                StatusMessage = "WiFi 설정이 취소되었습니다.";
+            }
+        }
+        catch (Exception ex)
+        {
+            StatusMessage = $"WiFi 설정 오류: {ex.Message}";
+        }
+    }
+
+    /// <summary>
     /// Connect to a specific device via COHN (WiFi provisioning)
     /// 특정 장치에 COHN (WiFi 프로비저닝)으로 연결합니다
     /// </summary>
@@ -784,35 +868,63 @@ public partial class GoProControlViewModel : ViewModelBase
 
         try
         {
-            // WiFi 프로비저닝 다이얼로그 표시
-            var dialogViewModel = new WiFiProvisionDialogViewModel(identifier);
-            var dialog = new WiFiProvisionDialog
-            {
-                DataContext = dialogViewModel
-            };
+            string ssid = "";
+            string password = "";
 
-            var result = await dialog.ShowDialog<bool?>(_ownerWindow);
-
-            // 사용자가 취소를 누른 경우
-            if (result != true)
+            // Try to load most recent WiFi profile
+            var profiles = await _settingsService.LoadWiFiProfilesAsync();
+            
+            if (profiles.Any())
             {
-                StatusMessage = "연결이 취소되었습니다.";
-                return;
+                // Use most recent profile automatically
+                var recentProfile = profiles.First();
+                ssid = recentProfile.Ssid;
+                password = recentProfile.Password;
+                StatusMessage = $"저장된 WiFi 프로필을 사용합니다: {ssid}";
+            }
+            else
+            {
+                // No saved profiles, show dialog
+                var dialogViewModel = new WiFiProvisionDialogViewModel(identifier);
+                var dialog = new WiFiProvisionDialog
+                {
+                    DataContext = dialogViewModel
+                };
+
+                var result = await dialog.ShowDialog<bool?>(_ownerWindow);
+
+                // User cancelled
+                if (result != true)
+                {
+                    StatusMessage = "연결이 취소되었습니다.";
+                    return;
+                }
+
+                ssid = dialogViewModel.Ssid;
+                password = dialogViewModel.Password;
+                
+                // Save this as a new profile for next time
+                var newProfile = new WiFiProfile
+                {
+                    Ssid = ssid,
+                    Password = password
+                };
+                await _settingsService.SaveWiFiProfileAsync(newProfile);
             }
 
-            // 프로비저닝 시작
+            // Start provisioning
             IsLoading = true;
             StatusMessage = $"GoPro {identifier} 프로비저닝 중... (약 30초 소요)";
 
             bool success = await _apiService.ProvisionGoProAsync(
                 identifier, 
-                dialogViewModel.Ssid, 
-                dialogViewModel.Password
+                ssid, 
+                password
             );
             
             if (success)
             {
-                // 연결 성공 시, 장치 목록에서 해당 장치를 찾아 Connected 상태를 true로 변경
+                // Update device connection status
                 var device = GoProDevices.FirstOrDefault(d => d.Identifier == identifier);
                 if (device != null)
                 {
@@ -1051,9 +1163,9 @@ public partial class GoProControlViewModel : ViewModelBase
     /// <param name="disconnectedDevices">연결이 끊긴 장치 목록</param>
     private async Task ShowReconnectionDialogAsync(List<GoProDevice> disconnectedDevices)
     {
-        // 다이얼로그를 표시하는 동안 연결 상태 모니터링을 일시 중지
-        // 다이얼로그가 열려있는 동안 추가 체크를 하지 않기 위함
-        _connectionHealthTimer.Stop();
+        // COHN 방식에서는 Health Check 타이머를 사용하지 않습니다
+        // 기존 BLE 방식의 타이머 정지 코드 (주석 처리)
+        // _connectionHealthTimer?.Stop();
 
         try
         {
@@ -1196,9 +1308,9 @@ public partial class GoProControlViewModel : ViewModelBase
         }
         finally
         {
-            // 다이얼로그가 닫힌 후 연결 상태 모니터링 재개
-            // finally 블록이므로 예외 발생 여부와 관계없이 실행됨
-            _connectionHealthTimer.Start();
+            // COHN 방식에서는 Health Check 타이머를 사용하지 않습니다
+            // 기존 BLE 방식의 타이머 재시작 코드 (주석 처리)
+            // _connectionHealthTimer?.Start();
         }
     }
 
